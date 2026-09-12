@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1a3c7e">
+<title>Quiniela — La Esquina de Celina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{--blue:#1a3c7e;--green:#2e7d32;--greenm:#388e3c;--greenl:#a5d6a7;--greenp:#e8f5e9;--gold:#f9a825;--goldp:#fff8e1;--g100:#f5f5f5;--g200:#e0e0e0;--g400:#bdbdbd;--g600:#757575;--blk:#1a1a1a;--wht:#fff;--red:#c62828;--bg:#eef1f7;}
+html{background:var(--bg);}
+body{font-family:'Poppins',sans-serif;background:var(--bg);color:var(--blk);min-height:100vh;font-size:16px;-webkit-font-smoothing:antialiased;}
+
+.hdr{background:linear-gradient(135deg,#0d2454,#1a3c7e);height:58px;padding:0 14px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 2px 10px rgba(0,0,0,0.25);}
+.hdr-back{display:flex;align-items:center;gap:5px;background:rgba(255,255,255,0.15);color:white;font-size:13px;font-weight:600;padding:8px 13px;border-radius:100px;text-decoration:none;}
+.hdr-back svg{width:14px;height:14px;}
+.hdr-center{text-align:center;}
+.hdr-agency{font-size:11px;font-weight:700;color:rgba(255,255,255,0.65);letter-spacing:0.06em;text-transform:uppercase;}
+.hdr-game{font-size:16px;font-weight:800;color:#ffd54f;letter-spacing:0.02em;line-height:1;}
+.hdr-ph{width:80px;}
+.hdr-img-wrap{width:42px;height:42px;flex-shrink:0;border-radius:8px;overflow:hidden;}
+.hdr-img-wrap img{width:100%;height:100%;object-fit:contain;}
+main{padding-bottom:150px;}
+
+.card{background:var(--wht);border-radius:16px;margin:10px 12px;overflow:hidden;box-shadow:0 1px 5px rgba(0,0,0,0.08);}
+.card-hdr{padding:12px 16px 10px;border-bottom:1px solid var(--g200);display:flex;align-items:center;justify-content:space-between;}
+.card-title{font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--g600);}
+
+.turnos-wrap{padding:12px;}
+.todos-opt{display:flex;align-items:center;gap:12px;padding:13px 15px;border:2px solid var(--g200);border-radius:12px;background:var(--wht);cursor:pointer;margin-bottom:10px;transition:all 0.15s;user-select:none;}
+.todos-opt:active{transform:scale(0.98);}
+.todos-opt.sel{border-color:var(--gold);background:var(--goldp);}
+.todos-chkbox{width:24px;height:24px;border-radius:6px;border:2px solid var(--g400);background:white;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;font-size:13px;}
+.todos-opt.sel .todos-chkbox{background:var(--gold);border-color:var(--gold);color:white;}
+.todos-info{flex:1;}
+.todos-lbl{font-size:14px;font-weight:700;color:var(--blk);display:block;}
+.todos-hint{font-size:11px;color:var(--g600);display:block;margin-top:1px;}
+.todos-badge{background:rgba(26,60,126,0.1);color:var(--blue);font-size:10px;font-weight:700;padding:4px 10px;border-radius:100px;white-space:nowrap;flex-shrink:0;}
+.todos-opt.sel .todos-badge{background:rgba(249,168,37,0.18);color:#b37800;}
+.turno-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.t-btn{padding:12px 10px;background:var(--wht);border:2px solid var(--g200);border-radius:12px;cursor:pointer;text-align:center;transition:all 0.15s;font-family:'Poppins',sans-serif;}
+.t-btn.sel{border-color:var(--green);background:var(--greenp);}
+.t-btn.fin{opacity:0.38;cursor:not-allowed;}
+.t-btn:active:not(.fin){transform:scale(0.97);}
+.t-name{display:block;font-size:14px;font-weight:700;color:var(--blk);}
+.t-hora{display:block;font-size:11px;color:var(--g600);margin-top:2px;}
+.t-fin-lbl{display:none;font-size:10px;color:var(--red);font-weight:600;margin-top:2px;}
+.t-btn.fin .t-fin-lbl{display:block;}
+.t-btn.sel .t-name{color:var(--green);}
+
+.lot-locked{padding:26px 16px;text-align:center;}
+.lot-locked .lock{font-size:28px;display:block;margin-bottom:8px;}
+.lot-locked p{font-size:13px;color:var(--g600);line-height:1.5;}
+.l-row{display:flex;align-items:center;padding:14px 16px;border-bottom:1px solid var(--g100);cursor:pointer;gap:12px;transition:background 0.1s;user-select:none;}
+.l-row:last-child{border-bottom:none;}
+.l-row:active{background:var(--greenp);}
+.l-row.dis{opacity:0.3;pointer-events:none;}
+.l-row.todas{border-bottom:2px solid var(--g200);}
+.l-row.todas .l-name{font-weight:700;color:var(--blue);}
+.l-chk{width:26px;height:26px;border-radius:50%;border:2px solid var(--g400);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.15s;}
+.l-chk.on{background:var(--green);border-color:var(--green);}
+.l-chk svg{display:none;}
+.l-chk.on svg{display:block;}
+.l-num{font-size:12px;color:var(--blue);font-weight:800;width:28px;flex-shrink:0;}
+.l-name{font-size:14px;color:var(--blk);flex:1;}
+.mv-note{padding:6px 16px 10px;font-size:11px;color:var(--g600);font-style:italic;}
+
+.rdb-row{display:flex;align-items:center;padding:16px;gap:14px;cursor:pointer;user-select:none;}
+.rdb-ico{width:42px;height:42px;border-radius:10px;background:rgba(26,60,126,0.1);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.rdb-txt{flex:1;}
+.rdb-title{font-size:15px;font-weight:700;}
+.rdb-desc{font-size:11px;color:var(--g600);margin-top:2px;line-height:1.4;}
+.toggle{width:50px;height:30px;background:var(--g200);border-radius:100px;position:relative;transition:background 0.2s;flex-shrink:0;cursor:pointer;border:none;}
+.toggle.on{background:var(--green);}
+.toggle-th{width:26px;height:26px;background:white;border-radius:50%;position:absolute;top:2px;left:2px;transition:transform 0.2s;box-shadow:0 1px 4px rgba(0,0,0,0.2);}
+.toggle.on .toggle-th{transform:translateX(20px);}
+.rdb-form{display:none;padding:0 12px 14px;}
+.rdb-form.open{display:block;}
+.rdb-cols{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px;}
+.rdb-col{background:var(--g100);border-radius:12px;padding:12px;}
+.rdb-col-ttl{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--g600);margin-bottom:8px;}
+.rdb-monto{display:flex;align-items:center;gap:8px;}
+.rdb-sign{font-size:20px;color:var(--g600);font-weight:300;}
+.rdb-note{font-size:11px;color:var(--g600);font-style:italic;margin-top:6px;}
+.btn-add-rdb{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;border:none;border-radius:10px;background:rgba(26,60,126,0.12);color:var(--blue);font-family:'Poppins',sans-serif;font-size:14px;font-weight:700;cursor:pointer;margin-top:10px;transition:all 0.15s;}
+.btn-add-rdb:disabled{background:var(--g100);color:var(--g400);cursor:not-allowed;}
+.btn-add-rdb:not(:disabled):active{transform:scale(0.98);}
+.rdb-item{display:flex;align-items:flex-start;gap:10px;background:var(--bluep);border-radius:10px;padding:10px 12px;margin:0 12px 8px;animation:fadeIn 0.2s ease;}
+.rdb-item-info{flex:1;}
+.rdb-item-nums{font-size:12px;font-weight:700;color:var(--blue);line-height:1.4;}
+.rdb-item-monto{font-size:13px;font-weight:800;color:var(--green);}
+.rdb-del{width:28px;height:28px;border-radius:50%;background:white;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--red);font-size:13px;flex-shrink:0;}
+
+input,select{-webkit-appearance:none;appearance:none;width:100%;border:2px solid var(--g200);border-radius:10px;padding:12px;font-family:'Poppins',sans-serif;font-size:16px;font-weight:600;color:var(--blk);background:white;outline:none;display:block;}
+input{text-align:center;}
+input:focus,select:focus{border-color:var(--blue);}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;}
+input.shake,select.shake{border-color:var(--red)!important;animation:shk 0.4s ease;}
+@keyframes shk{0%,100%{transform:translateX(0)}25%,75%{transform:translateX(-4px)}50%{transform:translateX(4px)}}
+
+.jugadas-topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:var(--g100);border-bottom:1px solid var(--g200);}
+.jugadas-lbl{font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--g600);}
+.jugadas-cnt{font-size:12px;font-weight:700;color:var(--green);}
+.jugadas-cnt.max{color:var(--red);}
+
+.jf-wrap{padding:14px 14px 6px;border-bottom:1px solid var(--g200);background:var(--g100);}
+.jf-label{font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--g600);margin-bottom:6px;display:block;}
+.jf-num-input{background:white;border:2px solid var(--g200);border-radius:12px;padding:13px 16px;font-family:'Poppins',sans-serif;font-size:26px;font-weight:800;color:var(--blue);text-align:center;width:100%;outline:none;margin-bottom:10px;}
+.jf-num-input:focus{border-color:var(--blue);}
+.jf-num-input.shake{border-color:var(--red)!important;animation:shk 0.4s ease;}
+.jf-row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.jf-val-wrap{position:relative;}
+.jf-val-sign{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:18px;font-weight:700;color:var(--g600);pointer-events:none;}
+.jf-val-input{background:white;border:2px solid var(--g200);border-radius:12px;padding:12px 12px 12px 28px;font-family:'Poppins',sans-serif;font-size:20px;font-weight:800;color:var(--green);text-align:right;width:100%;outline:none;}
+.jf-val-input:focus{border-color:var(--green);}
+.jf-val-input.shake{border-color:var(--red)!important;animation:shk 0.4s ease;}
+.jf-sel{background:white;border:2px solid var(--g200);border-radius:12px;padding:13px 30px 13px 13px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;color:var(--blk);width:100%;outline:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;-webkit-appearance:none;appearance:none;}
+.jf-sel:focus{border-color:var(--blue);}
+.jf-sel.shake{border-color:var(--red)!important;animation:shk 0.4s ease;}
+.btn-agregar{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border:none;border-radius:12px;background:var(--blue);color:white;font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:14px;transition:all 0.15s;}
+.btn-agregar:active{transform:scale(0.98);}
+.btn-agregar:disabled{background:var(--g400);cursor:not-allowed;transform:none;}
+
+.j-card{display:flex;align-items:center;gap:10px;padding:11px 14px;border-bottom:1px solid var(--g100);animation:fadeIn 0.2s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.j-num-pill{background:rgba(26,60,126,0.1);color:var(--blue);font-size:17px;font-weight:800;padding:7px 13px;border-radius:10px;flex-shrink:0;min-width:60px;text-align:center;}
+.j-ubic-pill{background:var(--greenp);color:var(--green);font-size:12px;font-weight:700;padding:5px 9px;border-radius:8px;flex-shrink:0;}
+.j-val{font-size:16px;font-weight:800;color:var(--green);flex:1;text-align:right;}
+.j-del{width:32px;height:32px;border-radius:50%;background:#ffebee;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--red);font-size:15px;font-weight:700;flex-shrink:0;}
+.empty-j{padding:22px;text-align:center;font-size:13px;color:var(--g400);font-style:italic;}
+
+.preview-wrap{padding:12px;}
+.wa-bubble{background:#dcf8c6;border-radius:12px 12px 12px 2px;padding:11px 13px;font-size:13px;line-height:1.6;box-shadow:0 1px 3px rgba(0,0,0,0.1);white-space:pre-wrap;word-break:break-word;font-family:'Poppins',sans-serif;}
+
+.btm{position:fixed;bottom:0;left:0;right:0;background:white;border-top:2px solid var(--g200);padding:11px 14px 18px;z-index:50;}
+.total-row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px;}
+.total-lbl{font-size:13px;color:var(--g600);}
+.total-breakdown{font-size:10px;color:var(--g400);margin-left:4px;}
+.total-amt{font-size:26px;font-weight:800;color:var(--blk);}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;border:none;border-radius:14px;font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;background:var(--g200);color:var(--g400);cursor:not-allowed;transition:all 0.2s;}
+.wa-btn.ok{background:#25d366;color:white;cursor:pointer;box-shadow:0 4px 16px rgba(37,211,102,0.35);}
+.wa-btn svg{width:19px;height:19px;flex-shrink:0;}
+.wa-note{text-align:center;font-size:11px;color:var(--g600);margin-top:7px;}
+.hidden{display:none!important;}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <a href="jugar.html" class="hdr-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 5l-7 7 7 7"/></svg>
+    Inicio
+  </a>
+  <div class="hdr-center">
+    <div class="hdr-agency">La Esquina de Celina</div>
+    <div class="hdr-game">Quiniela</div>
+  </div>
+  <div class="hdr-img-wrap">
+    <img src="img-quiniela.png" alt="" onerror="this.style.display='none'">
+  </div>
+</header>
+<main>
+  <div class="card">
+    <div class="card-hdr"><span class="card-title">Turno</span></div>
+    <div class="turnos-wrap">
+      <div class="todos-opt" id="btn-todos-t" onclick="toggleTodos()">
+        <div class="todos-chkbox" id="todos-cb"></div>
+        <div class="todos-info"><span class="todos-lbl">TODOS LOS TURNOS</span><span class="todos-hint">Seleccioná los 5 sorteos del día</span></div>
+        <span class="todos-badge" id="todos-badge-txt">5 turnos</span>
+      </div>
+      <div class="turno-grid" id="turno-grid"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><span class="card-title">Quinielas</span></div>
+    <div id="lot-locked" class="lot-locked"><span class="lock">🔒</span><p>Primero seleccioná el turno<br>para elegir las loterías</p></div>
+    <div id="lot-list" class="hidden">
+      <div class="l-row todas" onclick="toggleTodas()">
+        <div class="l-chk" id="chk-todas"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+        <div class="l-num"></div>
+        <div class="l-name">TODAS LAS LOTERÍAS</div>
+      </div>
+      <div id="lot-individual"></div>
+      <div class="mv-note">* Montevideo (3M) disponible solo en Matutina y Nocturna</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-hdr"><span class="card-title">Redoblona</span></div>
+    <div class="rdb-row" onclick="toggleRdb()">
+      <div class="rdb-ico">🔗</div>
+      <div class="rdb-txt"><div class="rdb-title">Redoblona</div><div class="rdb-desc">2 números de 2 cifras. La posición del nro 2 debe ser mayor o igual al nro 1.</div></div>
+      <button class="toggle" id="toggle-rdb" onclick="event.stopPropagation();toggleRdb()"><div class="toggle-th"></div></button>
+    </div>
+    <div class="rdb-form" id="rdb-form">
+      <div class="rdb-cols">
+        <div class="rdb-col">
+          <div class="rdb-col-ttl">Número 1</div>
+          <input type="text" inputmode="numeric" pattern="[0-9]*" id="rdb-n1" placeholder="00" style="font-size:22px;margin-bottom:8px" oninput="validarRdb()">
+          <select id="rdb-u1" onchange="actualizarPosicion2();validarRdb()" style="font-size:14px;padding:10px 28px 10px 10px">
+            <option value="">Posición...</option>
+            <option value="1">1°</option>
+            <option value="5">5°</option>
+            <option value="10">10°</option>
+            <option value="20">20°</option>
+          </select>
+        </div>
+        <div class="rdb-col">
+          <div class="rdb-col-ttl">Número 2</div>
+          <input type="text" inputmode="numeric" pattern="[0-9]*" id="rdb-n2" placeholder="00" style="font-size:22px;margin-bottom:8px" oninput="validarRdb()">
+          <select id="rdb-u2" style="font-size:14px;padding:10px 28px 10px 10px" disabled onchange="validarRdb()">
+            <option value="">Primero elegí posición 1</option>
+          </select>
+        </div>
+      </div>
+      <div class="rdb-monto"><span class="rdb-sign">$</span><input type="text" inputmode="numeric" pattern="[0-9]*" id="rdb-monto" placeholder="Monto" style="text-align:right;font-size:18px" onfocus="unformatVal(this)" onblur="formatVal(this);validarRdb()" oninput="validarRdb()"></div>
+      <div class="rdb-note">* Si posición 1 es 1°, posición 2 no puede ser también 1°</div>
+      <button class="btn-add-rdb" id="btn-add-rdb" onclick="agregarRedoblona()" disabled>🔗 Agregar redoblona</button>
+    </div>
+    <div id="rdb-list"></div>
+  </div>
+
+  <div class="card">
+    <div class="jugadas-topbar"><span class="jugadas-lbl">Jugadas</span><span class="jugadas-cnt" id="jcnt">0 / 16</span></div>
+    <div class="jf-wrap">
+      <label class="jf-label">Número</label>
+      <input type="text" inputmode="numeric" pattern="[0-9]*" class="jf-num-input" id="inp-num" placeholder="0000" autocomplete="off">
+      <div class="jf-row2">
+        <div><label class="jf-label">Ubicación</label><select class="jf-sel" id="inp-ubic"><option value="">Elegir...</option><option>Cabeza</option><option>01 a 05</option><option>01 a 10</option><option>01 a 20</option></select></div>
+        <div><label class="jf-label">Valor $</label><div class="jf-val-wrap"><span class="jf-val-sign">$</span><input type="text" inputmode="numeric" pattern="[0-9]*" class="jf-val-input" id="inp-val" placeholder="0" autocomplete="off" onfocus="unformatVal(this)" onblur="formatVal(this)"></div></div>
+      </div>
+      <button class="btn-agregar" id="add-btn" onclick="addJugada()">+ Agregar jugada</button>
+    </div>
+    <div class="j-cards" id="j-list"><div class="empty-j">Aún no agregaste jugadas</div></div>
+  </div>
+
+  <div class="card hidden" id="preview-card">
+    <div class="card-hdr"><span class="card-title">Vista previa del mensaje</span><span style="font-size:10px;font-weight:700;color:#1a3c7e">Como llegará al WhatsApp</span></div>
+    <div class="preview-wrap"><div class="wa-bubble" id="wa-bubble"></div></div>
+  </div>
+</main>
+
+<div class="btm">
+  <div class="total-row">
+    <div><span class="total-lbl">Total a pagar</span><span class="total-breakdown" id="breakdown"></span></div>
+    <span class="total-amt" id="total-amt">$0</span>
+  </div>
+  <button class="wa-btn" id="wa-btn" onclick="enviarWA()">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Enviar jugada por WhatsApp
+  </button>
+  <div class="wa-note" id="wa-note">Completá los datos de al menos una jugada</div>
+</div>
+
+<script>
+const WA='5491127605432';
+const SEP='▬▬▬▬▬▬▬▬▬▬▬▬';
+const TURNOS=[
+  {id:'laprevia',label:'La Previa',hora:'10:15',ch:10,cm:0,emoji:'🔴'},
+  {id:'primera',label:'Primera',hora:'12:00',ch:11,cm:45,emoji:'🟠'},
+  {id:'matutina',label:'Matutina',hora:'15:00',ch:14,cm:45,emoji:'🟡'},
+  {id:'vespertina',label:'Vespertina',hora:'18:00',ch:17,cm:45,emoji:'🔵'},
+  {id:'nocturna',label:'Nocturna',hora:'21:00',ch:20,cm:45,emoji:'🟣'},
+];
+const LOTERIAS=[
+  {id:'provincia',label:'Provincia',num:'1',restricted:false},
+  {id:'nacional',label:'Ciudad (Nacional)',num:'2',restricted:false},
+  {id:'cordoba',label:'Córdoba',num:'3',restricted:false},
+  {id:'santafe',label:'Santa Fe',num:'4',restricted:false},
+  {id:'entrerios',label:'Entre Ríos',num:'5',restricted:false},
+  {id:'montevideo',label:'Montevideo',num:'3M',restricted:true},
+];
+const POSICIONES=[1,5,10,20];
+
+let selT=[],selL=[],jugadas=[],redoblonas=[],rdbOn=false;
+const nowMin=()=>{const d=new Date();return d.getHours()*60+d.getMinutes();};
+const isFin=t=>nowMin()>=t.ch*60+t.cm;
+const avail=()=>TURNOS.filter(t=>!isFin(t));
+const hasMV=()=>selT.includes('todos')?avail().some(t=>t.id==='matutina'||t.id==='nocturna'):(selT.includes('matutina')||selT.includes('nocturna'));
+const pesos=n=>'$'+parseInt(n).toLocaleString('es-AR');
+const pad=n=>String(n).padStart(2,'0');
+function effT(){return selT.includes('todos')?avail():TURNOS.filter(t=>selT.includes(t.id));}
+function effL(){if(selL.includes('todas'))return LOTERIAS.filter(l=>!l.restricted||hasMV());return LOTERIAS.filter(l=>selL.includes(l.id));}
+
+function formatVal(el){const n=parseInt(el.value.replace(/\./g,''));if(!isNaN(n)&&n>0)el.value=n.toLocaleString('es-AR');}
+function unformatVal(el){el.value=el.value.replace(/\./g,'');}
+
+function buildTurnos(){
+  const grid=document.getElementById('turno-grid');
+  const av=avail();
+  grid.innerHTML='';
+  document.getElementById('todos-badge-txt').textContent=av.length+' turnos';
+  TURNOS.forEach(t=>{
+    const fin=isFin(t);
+    const el=document.createElement('div');
+    el.className='t-btn'+(fin?' fin':'');el.id='tb-'+t.id;
+    el.innerHTML=`<span class="t-name">${t.label}</span><span class="t-hora">${t.hora}</span><span class="t-fin-lbl">Finalizado</span>`;
+    if(!fin)el.onclick=()=>toggleTurno(t.id);
+    grid.appendChild(el);
+  });
+  if(!av.length){const b=document.getElementById('btn-todos-t');b.style.opacity='0.4';b.style.pointerEvents='none';}
+}
+function toggleTodos(){selT=selT.includes('todos')?[]:['todos'];refreshTUI();refreshLUI();updateTotal();updatePreview();updateWA();}
+function toggleTurno(id){selT=selT.filter(s=>s!=='todos');const i=selT.indexOf(id);if(i>-1)selT.splice(i,1);else selT.push(id);refreshTUI();refreshLUI();updateTotal();updatePreview();updateWA();}
+function refreshTUI(){
+  const isTodos=selT.includes('todos');
+  document.getElementById('btn-todos-t').classList.toggle('sel',isTodos);
+  const cb=document.getElementById('todos-cb');cb.textContent=isTodos?'✓':'';
+  TURNOS.forEach(t=>{const el=document.getElementById('tb-'+t.id);if(el)el.classList.toggle('sel',isTodos?!isFin(t):selT.includes(t.id));});
+}
+function refreshLUI(){
+  const hasTurno=selT.length>0;
+  document.getElementById('lot-locked').classList.toggle('hidden',hasTurno);
+  document.getElementById('lot-list').classList.toggle('hidden',!hasTurno);
+  if(!hasTurno)return;
+  const indiv=document.getElementById('lot-individual');
+  indiv.innerHTML='';
+  LOTERIAS.forEach(l=>{
+    const ok=l.restricted?hasMV():true;
+    const chk=selL.includes('todas')||selL.includes(l.id);
+    const row=document.createElement('div');
+    row.className='l-row'+(ok?'':' dis');
+    row.innerHTML=`<div class="l-chk ${chk&&ok?'on':''}" id="lc-${l.id}"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="l-num">${l.num}</div><div class="l-name">${l.label}</div>`;
+    if(ok)row.onclick=()=>toggleLoteria(l.id);
+    indiv.appendChild(row);
+  });
+  const ct=document.getElementById('chk-todas');if(ct)ct.classList.toggle('on',selL.includes('todas'));
+}
+function toggleTodas(){selL=selL.includes('todas')?[]:['todas'];refreshLUI();updateTotal();updatePreview();updateWA();}
+function toggleLoteria(id){selL=selL.filter(s=>s!=='todas');const i=selL.indexOf(id);if(i>-1)selL.splice(i,1);else selL.push(id);refreshLUI();updateTotal();updatePreview();updateWA();}
+
+function toggleRdb(){rdbOn=!rdbOn;document.getElementById('toggle-rdb').classList.toggle('on',rdbOn);document.getElementById('rdb-form').classList.toggle('open',rdbOn);updatePreview();updateWA();}
+
+function actualizarPosicion2(){
+  const p1=parseInt(document.getElementById('rdb-u1').value);
+  const sel2=document.getElementById('rdb-u2');
+  if(!p1){sel2.innerHTML='<option value="">Primero elegí posición 1</option>';sel2.disabled=true;return;}
+  sel2.disabled=false;
+  sel2.innerHTML='<option value="">Posición...</option>';
+  POSICIONES.forEach(p=>{
+    const permitido=(p1===1)?p!==1:p>=p1;
+    if(permitido)sel2.innerHTML+=`<option value="${p}">${p}°</option>`;
+  });
+}
+
+function validarRdb(){
+  const n1=document.getElementById('rdb-n1').value;
+  const u1=document.getElementById('rdb-u1').value;
+  const n2=document.getElementById('rdb-n2').value;
+  const u2=document.getElementById('rdb-u2').value;
+  const rm=document.getElementById('rdb-monto').value;
+  const ok=n1&&u1&&n2&&u2&&rm&&parseInt(rm)>=50;
+  const btn=document.getElementById('btn-add-rdb');
+  if(btn)btn.disabled=!ok;
+}
+function agregarRedoblona(){
+  const n1=document.getElementById('rdb-n1').value;
+  const u1=document.getElementById('rdb-u1').value;
+  const n2=document.getElementById('rdb-n2').value;
+  const u2=document.getElementById('rdb-u2').value;
+  const rm=parseInt(document.getElementById('rdb-monto').value.replace(/\./g,''));
+  if(!n1||!u1||!n2||!u2||!rm)return;
+  redoblonas.push({n1,u1,n2,u2,monto:rm});
+  document.getElementById('rdb-n1').value='';
+  document.getElementById('rdb-u1').value='';
+  document.getElementById('rdb-n2').value='';
+  document.getElementById('rdb-u2').value='';
+  document.getElementById('rdb-monto').value='';
+  actualizarPosicion2();
+  renderRedoblonas();updateTotal();updatePreview();updateWA();
+}
+function eliminarRedoblona(i){redoblonas.splice(i,1);renderRedoblonas();updateTotal();updatePreview();updateWA();}
+function renderRedoblonas(){
+  const list=document.getElementById('rdb-list');
+  if(!redoblonas.length){list.innerHTML='';return;}
+  list.innerHTML=redoblonas.map((r,i)=>`
+    <div class="rdb-item">
+      <div class="rdb-item-info">
+        <div class="rdb-item-nums">🎫 Redoblona ${i+1}<br>Nro 1: ${r.n1.padStart(2,'0')} — Posición ${r.u1}° &nbsp;|&nbsp; Nro 2: ${r.n2.padStart(2,'0')} — Posición ${r.u2}°</div>
+        <div class="rdb-item-monto">💵 ${pesos(r.monto)}</div>
+      </div>
+      <button class="rdb-del" onclick="eliminarRedoblona(${i})">✕</button>
+    </div>`).join('');
+}
+function addJugada(){
+  const numEl=document.getElementById('inp-num');
+  const ubicEl=document.getElementById('inp-ubic');
+  const valEl=document.getElementById('inp-val');
+  let ok=true;
+  if(!numEl.value.trim()){shake(numEl);ok=false;}
+  if(!ubicEl.value){shake(ubicEl);ok=false;}
+  const val=parseInt(valEl.value.replace(/\./g,''));
+  if(!val||val<50){shake(valEl);ok=false;}
+  if(!ok||jugadas.length>=16)return;
+  jugadas.push({num:numEl.value.trim(),ubic:ubicEl.value,val});
+  numEl.value='';ubicEl.value='';valEl.value='';
+  numEl.focus();
+  renderJugadas();updateTotal();updatePreview();updateWA();
+}
+function delJugada(i){jugadas.splice(i,1);renderJugadas();updateTotal();updatePreview();updateWA();}
+function renderJugadas(){
+  const list=document.getElementById('j-list');
+  const cnt=document.getElementById('jcnt');
+  cnt.textContent=jugadas.length+' / 16';
+  cnt.className='jugadas-cnt'+(jugadas.length>=16?' max':'');
+  document.getElementById('add-btn').disabled=jugadas.length>=16;
+  if(!jugadas.length){list.innerHTML='<div class="empty-j">Aún no agregaste jugadas</div>';return;}
+  list.innerHTML=jugadas.map((j,i)=>`<div class="j-card"><div class="j-num-pill">${pad(j.num)}</div><div class="j-ubic-pill">${j.ubic}</div><div class="j-val">${pesos(j.val)}</div><button class="j-del" onclick="delJugada(${i})">✕</button></div>`).join('');
+}
+function updateTotal(){
+  const jSum=jugadas.reduce((s,j)=>s+j.val,0);
+  const rdbSum=redoblonas.reduce((s,r)=>s+r.monto,0);
+  const tc=effT().length||(selT.length?1:0);
+  const lc=effL().length||(selL.length?1:0);
+  const total=jSum*(tc||1)*(lc||1)+rdbSum;
+  document.getElementById('total-amt').textContent=pesos(total);
+  const br=document.getElementById('breakdown');
+  br.textContent=(tc>1||lc>1)?`(${tc} ${tc===1?'turno':'turnos'} × ${lc} ${lc===1?'lotería':'loterías'})`:'';
+}
+function canSend(){
+  if(!selT.length||!selL.length)return false;
+  const hasJ=jugadas.length>0;
+  const hasRdb=redoblonas.length>0;
+  return hasJ||hasRdb;
+}
+function updateWA(){
+  const ok=canSend();
+  document.getElementById('wa-btn').classList.toggle('ok',ok);
+  const note=document.getElementById('wa-note');
+  note.style.display=ok?'none':'block';
+  if(!selT.length)note.textContent='Seleccioná al menos un turno';
+  else if(!selL.length)note.textContent='Seleccioná al menos una lotería';
+  else note.textContent='Completá los datos de al menos una jugada';
+}
+function buildMsgLines(){
+  const isTodos=selT.includes('todos');
+  const isTodas=selL.includes('todas');
+  const eT=effT();const eL=effL();
+  const L=[];
+  L.push('🍀 *LA ESQUINA DE CELINA*');L.push('_Jugada recibida ✓_');L.push('');
+  const addLots=(ls,todas)=>{
+    if(todas){L.push('  📌 *TODAS LAS LOTERÍAS*');jugadas.forEach(j=>L.push(`    › ${pad(j.num)} — ${j.ubic} — ${pesos(j.val)}`));}
+    else{ls.forEach((l,li)=>{if(li>0)L.push('');L.push(`  📌 *${l.num} - ${l.label.toUpperCase()}*`);jugadas.forEach(j=>L.push(`    › ${pad(j.num)} — ${j.ubic} — ${pesos(j.val)}`));});}
+  };
+  if(isTodos){L.push(`🎰${SEP}🎰`);L.push('⏰ *TODOS LOS TURNOS*');L.push(`🎰${SEP}🎰`);L.push('');addLots(eL,isTodas);}
+  else{eT.forEach((t,ti)=>{if(ti>0){L.push('');L.push('');}L.push(`${t.emoji}${SEP}${t.emoji}`);L.push(`⏰ *${t.label.toUpperCase()} · ${t.hora}*`);L.push(`${t.emoji}${SEP}${t.emoji}`);L.push('');addLots(eL,isTodas);});}
+  if(redoblonas.length>0){
+    L.push('');L.push('');L.push(`🔗${SEP}🔗`);L.push('🎰 *REDOBLONAS*');L.push(`🔗${SEP}🔗`);
+    redoblonas.forEach((r,i)=>{
+      L.push('');
+      L.push(`  🎫 Redoblona ${i+1}:`);
+      L.push(`  Nro 1: ${pad(r.n1)} — Posición ${r.u1}°`);
+      L.push(`  Nro 2: ${pad(r.n2)} — Posición ${r.u2}°`);
+      L.push(`  💵 Monto: ${pesos(r.monto)}`);
+    });
+  }
+  const jSum=jugadas.reduce((s,j)=>s+j.val,0);
+  const tc=effT().length||1;const lc=eL.length||1;const total=jSum*tc*lc;
+  L.push('');L.push('━━━━━━━━━━━━');L.push(`💰 *TOTAL: ${pesos(total)}*`);L.push('━━━━━━━━━━━━');
+  return L;
+}
+function updatePreview(){
+  const card=document.getElementById('preview-card');
+  const bubble=document.getElementById('wa-bubble');
+  const show=canSend();
+  card.classList.toggle('hidden',!show);
+  if(!show)return;
+  const lines=buildMsgLines();
+  const html=lines.map(l=>{let s=l.replace(/\*([^*]+)\*/g,'<b>$1</b>').replace(/_([^_]+)_/g,'<i>$1</i>');return s===''?'<br>':s;}).join('\n');
+  bubble.innerHTML=html;
+}
+function enviarWA(){if(!canSend())return;const msg=buildMsgLines().join('\n');window.open(`https://wa.me/${WA}?text=${encodeURIComponent(msg)}`,'_blank');}
+function shake(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake');setTimeout(()=>el.classList.remove('shake'),500);}
+document.addEventListener('DOMContentLoaded',()=>{buildTurnos();updateWA();});
+</script>
+</body>
+</html>

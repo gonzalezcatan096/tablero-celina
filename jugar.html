@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#060d1f">
+<title>La Esquina de Celina</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+body{font-family:'Poppins',sans-serif;background:#060d1f;min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+.hero{padding:28px 16px 10px;text-align:center;}
+.logo-wrap{width:90px;height:90px;border-radius:50%;border:3px solid rgba(255,255,255,0.25);margin:0 auto 12px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:rgba(255,255,255,0.08);}
+.logo-wrap img{width:100%;height:100%;object-fit:cover;}
+.logo-fb{font-size:2rem;font-weight:900;color:#a5d6a7;}
+h1{font-family:'Poppins',sans-serif;font-size:1.9rem;font-weight:900;color:white;letter-spacing:-0.01em;line-height:1.05;}
+h1 span{color:#ffd54f;}
+.subtitle{font-size:11px;color:rgba(255,255,255,0.45);margin-top:4px;letter-spacing:0.12em;text-transform:uppercase;}
+
+.cards{padding:10px 12px 100px;}
+.section-lbl{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:10px;padding-left:2px;}
+
+.game-card{position:relative;border-radius:20px;margin-bottom:11px;height:160px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:14px 16px;text-decoration:none;box-shadow:0 6px 20px rgba(0,0,0,0.5);transition:transform 0.1s;}
+.game-card:active{transform:scale(0.975);}
+.card-q  {background:linear-gradient(130deg,#1a5c2a,#2e7d32,#388e3c);}
+.card-q6 {background:linear-gradient(130deg,#bf360c,#e65100,#f57c00);}
+.card-lp {background:linear-gradient(130deg,#4a0404,#b71c1c,#c62828);}
+.card-qp {background:linear-gradient(130deg,#003020,#1b5e20,#2e7d32);}
+.card-br {background:linear-gradient(130deg,#1a0050,#4a148c,#6a1b9a);}
+.card-l5 {background:linear-gradient(130deg,#002020,#004d40,#00695c);}
+
+.balls{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+.ball{position:absolute;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-weight:800;color:rgba(255,255,255,0.92);animation:rise linear infinite;opacity:0;text-shadow:0 1px 2px rgba(0,0,0,0.4);}
+@keyframes rise{0%{transform:translateY(170px) rotate(0deg);opacity:0;}8%{opacity:.85;}92%{opacity:.85;}100%{transform:translateY(-30px) rotate(360deg);opacity:0;}}
+
+.gc-img{position:absolute;right:0;bottom:0;height:92%;width:auto;object-fit:contain;object-position:bottom right;opacity:.88;pointer-events:none;filter:drop-shadow(-4px 0 12px rgba(0,0,0,0.3));}
+
+.gc-row{display:flex;align-items:flex-end;justify-content:space-between;position:relative;z-index:2;}
+.gc-left{}
+.gc-tag{font-size:9px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.72);margin-bottom:3px;}
+.gc-name{font-family:'Poppins',sans-serif;font-size:2.1rem;font-weight:900;color:white;letter-spacing:-0.01em;line-height:1;text-transform:uppercase;text-shadow:0 2px 8px rgba(0,0,0,0.35);}
+.gc-info{font-size:14px;font-weight:700;color:white;line-height:1;margin-top:1px;}
+.gc-info.loading{font-size:12px;color:rgba(255,255,255,0.6);}
+.gc-sub{font-size:10px;color:rgba(255,255,255,0.65);margin-top:3px;}
+.gc-btn{background:rgba(255,255,255,0.2);color:white;font-family:'Poppins',sans-serif;font-size:13px;font-weight:700;padding:10px 16px;border-radius:100px;border:1.5px solid rgba(255,255,255,0.35);backdrop-filter:blur(4px);white-space:nowrap;flex-shrink:0;margin-left:10px;}
+
+.wa-fixed{position:fixed;bottom:16px;left:12px;right:12px;z-index:50;}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;border-radius:16px;background:#25d366;color:white;font-family:'Poppins',sans-serif;font-size:15px;font-weight:700;text-decoration:none;box-shadow:0 4px 20px rgba(37,211,102,0.45);}
+.wa-btn svg{width:22px;height:22px;flex-shrink:0;}
+.footer{text-align:center;padding:0 16px 100px;}
+.footer-text{font-size:10px;color:rgba(255,255,255,0.22);letter-spacing:0.04em;}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="logo-wrap">
+    <img src="grillo.png" alt="Grillo" onerror="this.parentElement.innerHTML='<div class=logo-fb>🍀</div>'">
+  </div>
+  <h1>La Esquina<br><span>de Celina</span></h1>
+  <p class="subtitle">Agencia de Lotería · Buenos Aires</p>
+</div>
+<div class="cards">
+  <div class="section-lbl">¿A qué querés jugar?</div>
+
+  <a href="quiniela.html" class="game-card card-q">
+    <div class="balls" id="bq"></div>
+    <img src="img-quiniela.png" class="gc-img" alt="" onerror="this.style.display='none'">
+    <div class="gc-row">
+      <div class="gc-left">
+        <div class="gc-tag">🍀 Próximo sorteo</div>
+        <div class="gc-name" id="q-name">Quiniela</div>
+        <div class="gc-sub" id="q-hora">5 sorteos diarios · Lunes a Sábado</div>
+      </div>
+      <div class="gc-btn">Jugar ›</div>
+    </div>
+  </a>
+
+  <a href="quini6.html" class="game-card card-q6">
+    <div class="balls" id="bq6"></div>
+    <img src="img-quini6.png" class="gc-img" alt="" onerror="this.style.display='none'">
+    <div class="gc-row">
+      <div class="gc-left">
+        <div class="gc-tag">⭐ Pozo acumulado</div>
+        <div class="gc-name">Quini 6</div>
+        <div class="gc-info loading" id="q6-p">Cargando...</div>
+        <div class="gc-sub">Miércoles y Domingos</div>
+      </div>
+      <div class="gc-btn">Jugar ›</div>
+    </div>
+  </a>
+
+  <a href="lotoplus.html" class="game-card card-lp">
+    <div class="balls" id="blp"></div>
+    <img src="img-lotoplus.png" class="gc-img" alt="" onerror="this.style.display='none'">
+    <div class="gc-row">
+      <div class="gc-left">
+        <div class="gc-tag">🔵 Pozo acumulado</div>
+        <div class="gc-name">Loto Plus</div>
+        <div class="gc-info loading" id="lp-p">Cargando...</div>
+        <div class="gc-sub">Martes y Viernes</div>
+      </div>
+      <div class="gc-btn">Jugar ›</div>
+    </div>
+  </a>
+
+  <a href="quinielaplus.html" class="game-card card-qp">
+    <div class="balls" id="bqp"></div>
+    <img src="img-quinielaplus.png" class="gc-img" alt="" onerror="this.style.display='none'">
+    <div class="gc-row">
+      <div class="gc-left">
+        <div class="gc-tag">🎰 Pozo acumulado</div>
+        <div class="gc-name" style="font-size:1.5rem">Quiniela Plus</div>
+        <div class="gc-info">+$60 millones</div>
+        <div class="gc-sub">Nocturna · Lunes a Sábado</div>
+      </div>
+      <div class="gc-btn">Jugar ›</div>
+    </div>
+  </a>
+
+  <a href="brinco.html" class="game-card card-br">
+    <div class="balls" id="bbr"></div>
+    <img src="img-brinco.png" class="gc-img" alt="" onerror="this.style.display='none'">
+    <div class="gc-row">
+      <div class="gc-left">
+        <div class="gc-tag">🎯 6 números · 00 al 39</div>
+        <div class="gc-name">Brinco</div>
+        <div class="gc-info">$1.500 por jugada</div>
+        <div class="gc-sub">Miércoles y Domingos</div>
+      </div>
+      <div class="gc-btn">Jugar ›</div>
+    </div>
+  </a>
+
+  <a href="loto5.html" class="game-card card-l5">
+    <div class="balls" id="bl5"></div>
+    <img src="img-loto5.png" class="gc-img" alt="" onerror="this.style.display='none'">
+    <div class="gc-row">
+      <div class="gc-left">
+        <div class="gc-tag">🎱 5 números · 00 al 36</div>
+        <div class="gc-name">Loto 5</div>
+        <div class="gc-info">$1.000 por jugada</div>
+        <div class="gc-sub">Lunes a Sábado</div>
+      </div>
+      <div class="gc-btn">Jugar ›</div>
+    </div>
+  </a>
+</div>
+
+<div class="wa-fixed">
+  <a href="https://wa.me/5491127605432" class="wa-btn" target="_blank">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    Consultar por WhatsApp
+  </a>
+</div>
+<div class="footer"><div class="footer-text">+18 · El juego en exceso es perjudicial para la salud</div></div>
+
+<script>
+function makeBalls(id,colors,nums){
+  const c=document.getElementById(id);if(!c)return;
+  nums.forEach((n,i)=>{
+    const b=document.createElement('div');b.className='ball';
+    const s=26+Math.random()*18,d=i*1.1+Math.random()*0.8,dur=4+Math.random()*3,r=4+Math.random()*52;
+    b.style.cssText=`width:${s}px;height:${s}px;font-size:${s*.34}px;right:${r}%;background:${colors[i%colors.length]};animation-duration:${dur}s;animation-delay:${d}s;`;
+    b.textContent=n;c.appendChild(b);
+  });
+}
+makeBalls('bq', ['#ffd54f','#ef5350','#42a5f5','#66bb6a','#ff8a65'],[7,23,15,8,42,31]);
+makeBalls('bq6',['#fff176','#ffcc02','#ffe082','#ffd54f'],[6,18,33,5,41,27]);
+makeBalls('blp', ['#ef9a9a','#ef5350','#ffcc02','#ff8a65'],[4,19,37,11,28]);
+makeBalls('bqp',['#a5d6a7','#ffd54f','#80cbc4','#c5e1a5'],[55,12,88,34,71]);
+makeBalls('bbr',['#ce93d8','#ba68c8','#e040fb','#f3e5f5'],[8,22,15,31,6,39]);
+makeBalls('bl5',['#80cbc4','#4db6ac','#26a69a','#b2dfdb'],[3,17,29,9,36]);
+
+const TURNOS=[
+  {label:'La Previa',hora:'10:15',ch:10,cm:0},
+  {label:'Primera',hora:'12:00',ch:11,cm:45},
+  {label:'Matutina',hora:'15:00',ch:14,cm:45},
+  {label:'Vespertina',hora:'18:00',ch:17,cm:45},
+  {label:'Nocturna',hora:'21:00',ch:20,cm:45},
+];
+function setTurno(){
+  const d=new Date(),now=d.getHours()*60+d.getMinutes();
+  const next=TURNOS.find(t=>now<t.ch*60+t.cm);
+  const ne=document.getElementById('q-name'),he=document.getElementById('q-hora');
+  if(next){ne.textContent=next.label;he.textContent=next.hora+' hs';}
+  else{ne.textContent='Quiniela';he.textContent='5 sorteos diarios · Lunes a Sábado';}
+}
+setTurno();
+
+async function fetchPozo(elId,url){
+  const el=document.getElementById(elId);
+  try{
+    const res=await fetch('https://api.allorigins.win/raw?url='+encodeURIComponent(url),{signal:AbortSignal.timeout(7000)});
+    const html=await res.text();
+    const m=html.match(/\$([\d]{1,3}(?:\.\d{3}){2,})/);
+    if(m){const n=parseInt(m[1].replace(/\./g,''));if(n>1000000){el.textContent='$'+(n/1000000).toFixed(0)+' millones';el.classList.remove('loading');return;}}
+    throw new Error();
+  }catch{el.textContent='Pozo acumulado';el.classList.remove('loading');}
+}
+fetchPozo('q6-p','https://www.loteriasantafe.gov.ar/index.php/resultados/quini-6');
+fetchPozo('lp-p','https://www.loteriasantafe.gov.ar/index.php/resultados/loto-plus');
+</script>
+</body>
+</html>

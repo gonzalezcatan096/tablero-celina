@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#04122e">
+<title>La Esquina de Celina — Portal</title>
+<meta name="description" content="Portal oficial de la Agencia La Esquina de Celina. Noticias, favoritos del día, resultados de todas las quinielas y horarios.">
+
+<meta property="og:title" content="La Esquina de Celina">
+<meta property="og:description" content="Noticias, favoritos del día y resultados de todas las quinielas.">
+<meta property="og:image" content="Logoprincipal.jpeg">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="Logoprincipal.jpeg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+/* ════════════════════════════════════════════════════════════════
+   PALETA — del logo, + un color propio por jurisdicción
+   ════════════════════════════════════════════════════════════════ */
+:root{
+  --azul-prof:#04122e;
+  --azul-noche:#0a2456;
+  --azul:#1a3c7e;
+  --azul-vivo:#1565d8;
+  --azul-luz:#3d8bff;
+  --lima:#a3d900;
+  --lima-cl:#c3f92c;
+  --lima-osc:#7cb000;
+  --verde-cl:#66bb6a;
+  --amarillo:#ffd54f;
+  --naranja:#ff8c42;
+  --rojo:#ef4444;
+  --violeta:#9b5de5;
+  --celeste:#00b4d8;
+  --oro:#ffc300;
+  --t1:rgba(255,255,255,0.97);
+  --t2:rgba(255,255,255,0.66);
+  --t3:rgba(255,255,255,0.42);
+  --panel:rgba(255,255,255,0.06);
+  --panel-2:rgba(255,255,255,0.10);
+  --panel-b:rgba(255,255,255,0.13);
+  --radio:20px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html{background:var(--azul-prof);scroll-behavior:smooth;}
+body{
+  font-family:'Poppins',system-ui,-apple-system,sans-serif;
+  background:
+    radial-gradient(900px 420px at 50% -10%, rgba(21,101,216,0.40), transparent 62%),
+    radial-gradient(700px 420px at 108% 22%, rgba(163,217,0,0.13), transparent 55%),
+    radial-gradient(650px 500px at -12% 68%, rgba(155,93,229,0.12), transparent 60%),
+    var(--azul-prof);
+  background-attachment:fixed;
+  color:var(--t1);min-height:100vh;-webkit-font-smoothing:antialiased;
+  padding-bottom:104px;overflow-x:hidden;
+}
+.wrap{max-width:560px;margin:0 auto;padding:0 14px;}
+section{margin-bottom:30px;}
+.ic{width:1em;height:1em;display:inline-block;vertical-align:-0.125em;flex-shrink:0;}
+
+/* ══ ENCABEZADOS DE SECCIÓN — tipografía display, un color por sección ══ */
+.sec-h{display:flex;align-items:center;gap:11px;margin-bottom:14px;}
+.sec-h .chip{width:36px;height:36px;border-radius:11px;display:flex;align-items:center;
+  justify-content:center;font-size:18px;flex-shrink:0;color:#08111f;
+  box-shadow:0 5px 16px rgba(0,0,0,0.32);}
+.sec-h h2{font-family:'Bebas Neue',Impact,sans-serif;font-size:1.62rem;letter-spacing:0.045em;
+  line-height:1;text-transform:uppercase;}
+.sec-h .line{flex:1;height:3px;border-radius:3px;}
+/* variantes de color */
+.v-lima  .chip{background:linear-gradient(140deg,var(--lima-cl),var(--lima-osc));}
+.v-lima  h2{color:var(--lima-cl);}  .v-lima  .line{background:linear-gradient(90deg,rgba(163,217,0,.55),transparent);}
+.v-oro   .chip{background:linear-gradient(140deg,#ffe07a,var(--oro));}
+.v-oro   h2{color:var(--amarillo);} .v-oro   .line{background:linear-gradient(90deg,rgba(255,213,79,.55),transparent);}
+.v-azul  .chip{background:linear-gradient(140deg,#7fb4ff,var(--azul-vivo));}
+.v-azul  h2{color:var(--azul-luz);} .v-azul  .line{background:linear-gradient(90deg,rgba(61,139,255,.55),transparent);}
+.v-viol  .chip{background:linear-gradient(140deg,#c9a5ff,var(--violeta));}
+.v-viol  h2{color:#c9a5ff;}         .v-viol  .line{background:linear-gradient(90deg,rgba(155,93,229,.55),transparent);}
+.v-naran .chip{background:linear-gradient(140deg,#ffc08a,var(--naranja));}
+.v-naran h2{color:#ffb27a;}         .v-naran .line{background:linear-gradient(90deg,rgba(255,140,66,.55),transparent);}
+
+/* ── HERO ──────────────────────────────────────────────────── */
+.hero{text-align:center;padding:24px 14px 12px;}
+.hero-logo{width:118px;height:118px;border-radius:50%;margin:0 auto 12px;overflow:hidden;
+  border:3px solid rgba(163,217,0,0.55);
+  box-shadow:0 0 0 7px rgba(163,217,0,0.08),0 0 44px rgba(163,217,0,0.24),0 14px 38px rgba(0,0,0,0.55);
+  background:var(--azul-noche);animation:flotar 5s ease-in-out infinite;}
+@keyframes flotar{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.hero-logo img{width:100%;height:100%;object-fit:cover;display:block;}
+/* Título en UNA sola línea: el tamaño se adapta al ancho del celular
+   (clamp) y nunca se parte, sin importar la pantalla. */
+.hero h1{font-family:'Bebas Neue',Impact,sans-serif;font-size:clamp(1.7rem,9.6vw,2.9rem);
+  line-height:1;letter-spacing:0.02em;white-space:nowrap;}
+.hero h1 .lima{background:linear-gradient(100deg,var(--lima),var(--lima-cl),var(--amarillo));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;}
+.hero .dir{font-size:10.5px;color:var(--t3);letter-spacing:0.11em;text-transform:uppercase;margin-top:8px;}
+.estado{display:inline-flex;align-items:center;gap:7px;margin-top:12px;
+  padding:8px 16px;border-radius:100px;font-size:12px;font-weight:800;border:1px solid;}
+.estado .dot{width:7px;height:7px;border-radius:50%;}
+.estado.abierto{background:rgba(102,187,106,0.15);border-color:rgba(102,187,106,0.45);color:#a9ecac;}
+.estado.abierto .dot{background:#66bb6a;animation:latido 2s infinite;}
+.estado.cerrado{background:rgba(239,68,68,0.14);border-color:rgba(239,68,68,0.4);color:#ffb0ae;}
+.estado.cerrado .dot{background:var(--rojo);}
+@keyframes latido{0%{box-shadow:0 0 0 0 rgba(102,187,106,.7)}70%{box-shadow:0 0 0 9px rgba(102,187,106,0)}100%{box-shadow:0 0 0 0 rgba(102,187,106,0)}}
+
+/* Sello de Lotería de la Provincia: chapita rectangular en la esquina
+   superior, fuera del flujo para que no empuje al título.
+   Lleva fondo claro porque el logo es azul sobre transparente. */
+.oficial{position:absolute;top:12px;right:12px;z-index:30;
+  background:rgba(255,255,255,0.96);border-radius:9px;padding:7px 11px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.4);line-height:0;}
+.oficial img{height:18px;width:auto;display:block;}
+.pie-logo{display:block;height:26px;width:auto;margin:0 auto 12px;opacity:0.55;
+  filter:brightness(0) invert(1);}
+
+/* ── CTA PRINCIPAL (reemplaza "accesos rápidos") ───────────── */
+.cta-jugar{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:var(--radio);
+  background:linear-gradient(125deg,var(--azul-vivo),var(--azul) 70%);text-decoration:none;color:#fff;
+  border:1px solid rgba(61,139,255,0.6);box-shadow:0 12px 32px rgba(21,101,216,0.36);
+  margin-bottom:30px;position:relative;overflow:hidden;}
+.cta-jugar:active{transform:scale(0.985);}
+.cta-jugar img{height:76px;width:auto;margin:-14px -4px -14px 0;filter:drop-shadow(0 5px 12px rgba(0,0,0,.4));}
+.cta-txt{flex:1;min-width:0;}
+.cta-txt .t{font-family:'Bebas Neue',Impact,sans-serif;font-size:1.55rem;line-height:1;letter-spacing:0.03em;}
+.cta-txt .s{font-size:11.5px;color:rgba(255,255,255,0.8);margin-top:3px;}
+
+/* ══ NOTICIA DESTACADA ══ */
+/* Cartel de noticia: fondo profundo con filo lima, en vez del bloque
+   verde plano. La barra lateral y el tag dan jerarquía sin gritar. */
+.destacado{position:relative;overflow:hidden;border-radius:var(--radio);
+  padding:19px 19px 19px 24px;margin-bottom:12px;
+  background:linear-gradient(135deg,#0d2f52,#0a1f45 55%,#071a3a);
+  border:1px solid rgba(163,217,0,0.45);
+  box-shadow:0 16px 40px rgba(0,0,0,0.45),inset 0 1px 0 rgba(255,255,255,0.07);}
+.destacado::before{content:'';position:absolute;left:0;top:0;bottom:0;width:6px;
+  background:linear-gradient(180deg,var(--lima-cl),var(--lima-osc));
+  box-shadow:0 0 20px rgba(163,217,0,0.75);animation:pulso 3s ease-in-out infinite;}
+@keyframes pulso{0%,100%{box-shadow:0 0 16px rgba(163,217,0,.55)}
+                 50%{box-shadow:0 0 30px rgba(163,217,0,1)}}
+.destacado::after{content:'';position:absolute;top:-70px;right:-60px;width:200px;height:200px;
+  border-radius:50%;background:radial-gradient(circle,rgba(163,217,0,0.2),transparent 68%);}
+.dest-badge{display:inline-flex;align-items:center;gap:6px;
+  background:var(--lima);color:#12300a;
+  font-size:9px;font-weight:900;letter-spacing:0.16em;text-transform:uppercase;
+  padding:5px 12px;border-radius:5px;position:relative;z-index:2;margin-bottom:11px;
+  box-shadow:0 4px 14px rgba(163,217,0,0.4);}
+.dest-tt{font-family:'Bebas Neue',Impact,sans-serif;font-size:1.72rem;line-height:1.02;
+  position:relative;z-index:2;letter-spacing:0.025em;color:#fff;
+  text-shadow:0 2px 14px rgba(0,0,0,0.5);}
+.dest-ms{font-size:13px;font-weight:500;margin-top:8px;line-height:1.55;
+  color:var(--t2);position:relative;z-index:2;}
+.dest-fecha{font-size:10px;font-weight:700;margin-top:12px;color:var(--lima-cl);
+  letter-spacing:0.08em;position:relative;z-index:2;}
+
+/* ── NOTICIAS ──────────────────────────────────────────────── */
+.nov{display:flex;gap:13px;background:var(--panel);border:1px solid var(--panel-b);
+  border-radius:16px;padding:15px;margin-bottom:9px;position:relative;overflow:hidden;}
+.nov::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--azul-luz);}
+.nov.tipo-alias::before{background:linear-gradient(180deg,var(--lima),var(--lima-osc));}
+.nov.tipo-aviso::before{background:linear-gradient(180deg,var(--amarillo),var(--naranja));}
+.nov.tipo-cierre::before{background:linear-gradient(180deg,var(--rojo),#b91c1c);}
+.nov.tipo-promo::before{background:linear-gradient(180deg,var(--verde-cl),#2e7d32);}
+.nov-ico{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;
+  justify-content:center;font-size:18px;flex-shrink:0;background:rgba(61,139,255,0.16);color:var(--azul-luz);}
+.nov.tipo-alias .nov-ico{background:rgba(163,217,0,.16);color:var(--lima-cl);}
+.nov.tipo-aviso .nov-ico{background:rgba(255,213,79,.16);color:var(--amarillo);}
+.nov.tipo-cierre .nov-ico{background:rgba(239,68,68,.16);color:#ff8a87;}
+.nov.tipo-promo .nov-ico{background:rgba(102,187,106,.16);color:var(--verde-cl);}
+.nov-t{font-size:14.5px;font-weight:800;line-height:1.28;}
+.nov-m{font-size:12.5px;color:var(--t2);margin-top:5px;line-height:1.55;}
+.nov-f{font-size:10px;color:var(--t3);margin-top:7px;font-weight:600;}
+
+/* ── PRÓXIMO SORTEO ────────────────────────────────────────── */
+.proximo{border-radius:var(--radio);padding:19px;position:relative;overflow:hidden;
+  background:linear-gradient(140deg,rgba(21,101,216,0.46),rgba(10,36,86,0.9));
+  border:1px solid rgba(61,139,255,0.42);box-shadow:0 12px 34px rgba(0,0,0,0.34);}
+.proximo .grillo{position:absolute;right:-18px;bottom:-12px;height:124%;opacity:0.24;pointer-events:none;}
+.prox-et{display:inline-flex;align-items:center;gap:6px;font-size:9.5px;font-weight:900;
+  letter-spacing:0.15em;text-transform:uppercase;color:var(--amarillo);margin-bottom:8px;
+  background:rgba(255,213,79,0.13);border:1px solid rgba(255,213,79,0.3);padding:4px 10px;border-radius:100px;}
+.proximo .nom{font-family:'Bebas Neue',Impact,sans-serif;font-size:2.3rem;line-height:0.95;
+  position:relative;z-index:1;letter-spacing:0.02em;}
+.proximo .hora{font-size:12.5px;color:var(--t2);margin-top:5px;position:relative;z-index:1;line-height:1.5;}
+.cuenta{display:flex;gap:7px;margin-top:15px;position:relative;z-index:1;}
+.cuenta .u{background:rgba(0,0,0,0.4);border:1px solid var(--panel-b);border-radius:12px;
+  padding:10px 0;text-align:center;min-width:60px;}
+.cuenta .n{font-family:'Bebas Neue',Impact,sans-serif;font-size:1.85rem;line-height:0.9;color:var(--lima-cl);}
+.cuenta .l{font-size:8.5px;letter-spacing:0.11em;text-transform:uppercase;color:var(--t3);margin-top:4px;font-weight:700;}
+.cuenta.cerrado-hoy{font-size:13px;color:var(--t2);display:block;}
+
+/* ══ FAVORITOS — cuadros con nombre ══ */
+/* ── FAVORITOS ──────────────────────────────────────────────
+   Las ilustraciones vienen con fondo BLANCO OPACO (son PNG sin
+   canal alfa), así que la tarjeta es un panel blanco: el fondo del
+   personaje se funde con ella y queda como el cartel impreso.
+   El número va dentro del cartel que sostiene cada uno; la posición
+   y el tamaño se miden por personaje (ver PERSONAJES en el script),
+   porque el cartel no está a la misma altura en todos. */
+.favs{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+.fav{background:#fff;border-radius:17px;overflow:hidden;
+  box-shadow:0 9px 24px rgba(0,0,0,0.38);border:1px solid rgba(255,255,255,0.45);}
+.fav-cab{font-family:'Bebas Neue',Impact,sans-serif;font-size:1.02rem;letter-spacing:0.08em;
+  text-align:center;padding:8px 6px 6px;line-height:1;color:#fff;
+  background:linear-gradient(100deg,var(--azul-noche),var(--azul-vivo));}
+.fav.es-dia  .fav-cab{background:linear-gradient(100deg,var(--lima-osc),var(--lima));color:#12300a;}
+.fav.es-atr  .fav-cab{background:linear-gradient(100deg,#b34700,var(--naranja));}
+.fav-foto{position:relative;container-type:inline-size;background:#fff;line-height:0;}
+.fav-foto img{width:100%;height:auto;display:block;}
+/* --cy = centro vertical del cartel · --fs = tamaño, en % del ancho */
+.fav-num{position:absolute;left:50%;top:var(--cy,70%);transform:translate(-50%,-50%);
+  font-family:'Bebas Neue',Impact,sans-serif;font-size:calc(var(--fs,22) * 1cqw);
+  line-height:0.85;letter-spacing:0.015em;color:#12307a;white-space:nowrap;
+  text-shadow:0 2px 0 rgba(255,255,255,0.95),0 0 12px rgba(255,255,255,0.9);}
+.fav.es-atr .fav-num{color:#a83200;}
+/* Respaldo: favorito sin imagen, o imagen que no cargó */
+.fav-foto.sin-foto{aspect-ratio:5/4;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 50% 40%,#ffffff,#e9eef6);}
+.fav-foto.sin-foto .fav-num{position:static;transform:none;font-size:2.7rem;text-shadow:none;}
+.fav-num-solo{font-family:'Bebas Neue',Impact,sans-serif;font-size:2.7rem;
+  line-height:1;color:#12307a;}
+.fav.es-atr .fav-num-solo{color:#a83200;}
+.favs-nota{font-size:10.5px;color:var(--t3);margin-top:12px;text-align:center;font-style:italic;}
+
+/* ══ RESULTADOS — selector de turno + 6 jurisdicciones ══ */
+.turnos-sel{display:flex;gap:6px;overflow-x:auto;padding-bottom:9px;margin-bottom:11px;
+  scrollbar-width:none;}
+.turnos-sel::-webkit-scrollbar{display:none;}
+.t-chip{flex:0 0 auto;padding:9px 15px;border-radius:100px;border:1px solid var(--panel-b);
+  background:var(--panel);color:var(--t2);font-size:12px;font-weight:800;cursor:pointer;
+  font-family:'Poppins',sans-serif;white-space:nowrap;transition:all 0.16s;}
+.t-chip.on{background:linear-gradient(120deg,var(--amarillo),var(--oro));color:#2a1d00;
+  border-color:transparent;box-shadow:0 5px 16px rgba(255,195,0,0.34);}
+.t-chip .h{display:block;font-size:9px;font-weight:600;opacity:0.72;margin-top:1px;}
+
+.jur{border-radius:15px;margin-bottom:8px;overflow:hidden;border:1px solid var(--panel-b);
+  background:var(--panel);position:relative;}
+.jur::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c);}
+.jur-h{display:flex;align-items:center;gap:11px;padding:12px 14px 12px 16px;}
+.jur.tiene .jur-h{cursor:pointer;}
+.jur.tiene .jur-h:active{background:rgba(255,255,255,0.04);}
+.jur-sig{width:38px;height:38px;border-radius:11px;flex-shrink:0;display:flex;align-items:center;
+  justify-content:center;font-family:'Bebas Neue',Impact,sans-serif;font-size:14px;letter-spacing:0.04em;
+  color:#08111f;background:var(--c);box-shadow:0 4px 12px rgba(0,0,0,0.3);}
+.jur-t{flex:1;min-width:0;}
+.jur-n{font-size:14px;font-weight:800;line-height:1.15;}
+.jur-s{font-size:10px;color:var(--t3);margin-top:2px;}
+.jur-cab{font-family:'Bebas Neue',Impact,sans-serif;font-size:2rem;line-height:0.9;
+  color:var(--c);letter-spacing:0.03em;}
+.jur-pend{font-size:10.5px;color:var(--t3);font-weight:700;font-style:italic;}
+.jur-fl{font-size:11px;color:var(--t3);transition:transform 0.24s;flex-shrink:0;}
+.jur.abierto .jur-fl{transform:rotate(180deg);}
+.jur-nums{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
+.jur.abierto .jur-nums{max-height:460px;}
+.jur-nums-in{padding:12px 13px 14px;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.rn{background:rgba(0,0,0,0.3);border-radius:9px;padding:6px 2px;text-align:center;border:1px solid transparent;}
+.rn .p{font-size:8px;font-weight:800;color:var(--t3);}
+.rn .v{font-size:13px;font-weight:800;font-variant-numeric:tabular-nums;}
+.rn.cabeza{background:color-mix(in srgb,var(--c) 20%,transparent);border-color:var(--c);}
+.rn.cabeza .v{color:var(--c);}
+.res-pie{margin-top:12px;display:flex;gap:9px;align-items:center;flex-wrap:wrap;}
+.res-fecha{font-size:10.5px;color:var(--t3);}
+.fuente-tag{font-size:9px;font-weight:700;color:var(--t3);background:var(--panel);
+  border:1px solid var(--panel-b);padding:3px 8px;border-radius:100px;}
+
+/* ── SORTEOS Y HORARIOS ────────────────────────────────────── */
+/* Tarjetas de juego: la ilustración va GRANDE y pegada al borde,
+   sobre el degradado propio de cada juego (mismo criterio que el
+   index.html original). Son imágenes apaisadas de 1536x1024: en un
+   cuadradito de 54px el dibujo quedaba diminuto y rodeado de vacío. */
+.juego{border-radius:18px;margin-bottom:10px;overflow:hidden;position:relative;
+  background:var(--g);border:1px solid rgba(255,255,255,0.15);
+  box-shadow:0 9px 26px rgba(0,0,0,0.36);}
+.juego-h{position:relative;display:flex;align-items:flex-end;gap:12px;
+  min-height:106px;padding:14px 15px;cursor:pointer;user-select:none;}
+.juego-h:active{filter:brightness(1.08);}
+.juego-art{position:absolute;right:-8px;bottom:0;height:108%;width:auto;max-width:58%;
+  object-fit:contain;object-position:bottom right;pointer-events:none;
+  filter:drop-shadow(-6px 2px 15px rgba(0,0,0,0.45));}
+.juego-t{position:relative;z-index:2;flex:1;min-width:0;}
+.juego-n{font-family:'Bebas Neue',Impact,sans-serif;font-size:1.62rem;line-height:0.98;
+  letter-spacing:0.035em;text-shadow:0 2px 10px rgba(0,0,0,0.5);}
+.juego-d{font-size:10.5px;color:rgba(255,255,255,0.84);margin-top:3px;font-weight:500;
+  text-shadow:0 1px 7px rgba(0,0,0,0.6);}
+.juego-fl{position:relative;z-index:2;font-size:12px;color:rgba(255,255,255,0.9);
+  transition:transform 0.24s;flex-shrink:0;}
+.juego.open .juego-fl{transform:rotate(180deg);}
+.juego-body{max-height:0;overflow:hidden;transition:max-height 0.28s ease;position:relative;z-index:2;}
+.juego.open .juego-body{max-height:460px;}
+.juego-in{padding:4px 15px 13px;background:rgba(0,0,0,0.34);}
+.horario{display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:9px 0;border-top:1px solid rgba(255,255,255,0.15);font-size:12.5px;}
+.horario .hn{color:rgba(255,255,255,0.8);}
+.horario .hh{font-weight:800;color:var(--amarillo);font-variant-numeric:tabular-nums;}
+.horario.pasado .hh{color:rgba(255,255,255,0.4);text-decoration:line-through;}
+.horario.pasado .hn{color:rgba(255,255,255,0.4);}
+
+/* ── ALIAS ─────────────────────────────────────────────────── */
+.alias{background:linear-gradient(140deg,rgba(46,125,50,0.36),rgba(163,217,0,0.1));
+  border:1px solid rgba(163,217,0,0.4);border-radius:var(--radio);padding:17px;}
+.alias .et{font-size:9.5px;font-weight:900;letter-spacing:0.15em;text-transform:uppercase;color:var(--t2);}
+.alias-row{display:flex;align-items:center;gap:11px;margin-top:10px;}
+.alias-v{flex:1;font-size:1.2rem;font-weight:900;color:var(--lima-cl);word-break:break-all;line-height:1.2;}
+.btn-cop{background:var(--lima);color:#12300a;border:none;font-family:inherit;font-size:12px;
+  font-weight:900;padding:11px 16px;border-radius:11px;cursor:pointer;flex-shrink:0;
+  display:inline-flex;align-items:center;gap:6px;}
+.btn-cop:active{transform:scale(0.93);}
+.btn-cop.ok{background:var(--verde-cl);color:#fff;}
+.alias-tit{font-size:12px;color:var(--t2);margin-top:10px;line-height:1.45;}
+
+/* ── BARRA WHATSAPP + PIE ──────────────────────────────────── */
+.wa-bar{position:fixed;bottom:0;left:0;right:0;z-index:60;
+  padding:11px 14px calc(11px + env(safe-area-inset-bottom));
+  background:linear-gradient(to top,var(--azul-prof) 58%,rgba(4,18,46,0));}
+.wa-in{max-width:560px;margin:0 auto;}
+.wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;
+  border-radius:16px;background:linear-gradient(135deg,#25d366,#1ebe5a);color:#fff;
+  font-size:15px;font-weight:800;text-decoration:none;box-shadow:0 8px 30px rgba(37,211,102,0.42);}
+.wa-btn svg{width:21px;height:21px;}
+.pie{text-align:center;padding:10px 14px 4px;}
+.pie-l{font-size:11px;color:var(--t3);line-height:1.75;}
+.pie-w{font-size:10px;color:rgba(255,255,255,0.26);margin-top:10px;
+  border-top:1px solid rgba(255,255,255,0.07);padding-top:12px;line-height:1.6;}
+
+/* ── Utilidades ────────────────────────────────────────────── */
+.vacio{text-align:center;padding:22px 14px;color:var(--t3);font-size:12.5px;
+  background:var(--panel);border:1px dashed var(--panel-b);border-radius:16px;line-height:1.55;}
+.vacio img{width:78px;opacity:0.55;margin-bottom:9px;}
+.oculto{display:none !important;}
+.sk{background:linear-gradient(90deg,var(--panel) 25%,rgba(255,255,255,.11) 50%,var(--panel) 75%);
+  background-size:200% 100%;animation:sk 1.4s infinite;border-radius:15px;height:60px;margin-bottom:8px;}
+@keyframes sk{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
+</style>
+</head>
+<body>
+
+<!-- Sello de Lotería de la Provincia, en la esquina superior -->
+<div class="oficial">
+  <img src="web/logo-loteria.png" alt="Lotería de la Provincia"
+       onerror="this.parentElement.style.display='none'">
+</div>
+
+<!-- ═══════════ ICONOS ═══════════ -->
+<svg style="display:none" aria-hidden="true">
+  <symbol id="ic-megafono" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 11l18-5v12L3 13v-2z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></symbol>
+  <symbol id="ic-reloj" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="ic-estrella" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <polygon points="12 2 15.1 8.6 22 9.3 16.8 14 18.3 21 12 17.4 5.7 21 7.2 14 2 9.3 8.9 8.6 12 2"/></symbol>
+  <symbol id="ic-diana" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="ic-calendario" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
+    <line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="ic-tarjeta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></symbol>
+  <symbol id="ic-flecha" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 12 15 18 9"/></symbol>
+  <symbol id="ic-alerta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/>
+    <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="ic-cerrado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/><line x1="4.9" y1="4.9" x2="19.1" y2="19.1"/></symbol>
+  <symbol id="ic-regalo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/>
+    <line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/>
+    <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></symbol>
+  <symbol id="ic-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+  <symbol id="ic-copiar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="ic-dado" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.3" fill="currentColor"/>
+    <circle cx="15.5" cy="15.5" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/></symbol>
+</svg>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<header class="hero">
+  <div class="hero-logo">
+    <img src="Logoprincipal.jpeg" alt="La Esquina de Celina" onerror="this.parentElement.style.display='none'">
+  </div>
+  <h1>La Esquina <span class="lima">de Celina</span></h1>
+  <p class="dir" id="dir">Olavarría y Unanue · Provincia de Bs. As.</p>
+  <div class="estado abierto" id="estado"><span class="dot"></span><span id="estado-txt">Cargando…</span></div>
+</header>
+
+<div class="wrap">
+
+  <!-- CTA principal: la acción que realmente importa -->
+  <a href="jugar.html" class="cta-jugar">
+    <div class="cta-txt">
+      <div class="t">Cargar mi jugada</div>
+      <div class="s">Armá tu jugada y mandala por WhatsApp</div>
+    </div>
+    <img src="grillo.png" alt="" onerror="this.style.display='none'">
+  </a>
+
+  <!-- ═══ 1 · NOTICIAS ═══ -->
+  <section id="s-novedades">
+    <div class="sec-h v-lima">
+      <span class="chip"><svg class="ic"><use href="#ic-megafono"/></svg></span>
+      <h2>Noticias de la agencia</h2><span class="line"></span>
+    </div>
+    <div class="destacado oculto" id="destacado">
+      <span class="dest-badge"><svg class="ic"><use href="#ic-alerta"/></svg><span id="dest-et">Importante</span></span>
+      <div class="dest-tt" id="dest-tt"></div>
+      <div class="dest-ms" id="dest-ms"></div>
+      <div class="dest-fecha" id="dest-fecha"></div>
+    </div>
+    <div id="novedades"></div>
+  </section>
+
+  <!-- ═══ 2 · FAVORITOS ═══ -->
+  <section id="s-favoritos">
+    <div class="sec-h v-oro">
+      <span class="chip"><svg class="ic"><use href="#ic-estrella"/></svg></span>
+      <h2>Favoritos del día</h2><span class="line"></span>
+    </div>
+    <div class="favs" id="favs"></div>
+    <p class="favs-nota" id="favs-nota"></p>
+  </section>
+
+  <!-- ═══ 3 · PRÓXIMO SORTEO ═══ -->
+  <section>
+    <div class="sec-h v-azul">
+      <span class="chip"><svg class="ic"><use href="#ic-reloj"/></svg></span>
+      <h2>Próximo sorteo</h2><span class="line"></span>
+    </div>
+    <div class="proximo">
+      <img src="grillo.png" class="grillo" alt="" onerror="this.style.display='none'">
+      <div class="prox-et"><svg class="ic"><use href="#ic-dado"/></svg> Quiniela de Provincia</div>
+      <div class="nom" id="prox-nom">—</div>
+      <div class="hora" id="prox-hora"></div>
+      <div class="cuenta" id="cuenta"></div>
+    </div>
+  </section>
+
+  <!-- ═══ 4 · RESULTADOS ═══ -->
+  <section id="s-resultados">
+    <div class="sec-h v-viol">
+      <span class="chip"><svg class="ic"><use href="#ic-diana"/></svg></span>
+      <h2>Resultados</h2><span class="line"></span>
+    </div>
+    <div class="turnos-sel" id="turnos-sel"></div>
+    <div id="jurisdicciones"><div class="sk"></div><div class="sk"></div><div class="sk"></div></div>
+    <div class="res-pie">
+      <span class="res-fecha" id="res-fecha"></span>
+      <span class="fuente-tag oculto" id="fuente-tag"></span>
+    </div>
+  </section>
+
+  <!-- ═══ 5 · SORTEOS Y HORARIOS ═══ -->
+  <section id="s-sorteos">
+    <div class="sec-h v-naran">
+      <span class="chip"><svg class="ic"><use href="#ic-calendario"/></svg></span>
+      <h2>Sorteos y horarios</h2><span class="line"></span>
+    </div>
+    <div id="juegos"></div>
+  </section>
+
+  <!-- ═══ 6 · CÓMO PAGAR ═══ -->
+  <section id="s-alias">
+    <div class="sec-h v-lima">
+      <span class="chip"><svg class="ic"><use href="#ic-tarjeta"/></svg></span>
+      <h2>Cómo pagar</h2><span class="line"></span>
+    </div>
+    <div class="alias">
+      <div class="et">Alias para transferencias</div>
+      <div class="alias-row">
+        <div class="alias-v" id="alias-v">—</div>
+        <button class="btn-cop" id="btn-cop" type="button">
+          <svg class="ic" id="cop-ico"><use href="#ic-copiar"/></svg><span id="cop-txt">Copiar</span></button>
+      </div>
+      <div class="alias-tit" id="alias-tit"></div>
+    </div>
+  </section>
+
+  <footer class="pie">
+    <img class="pie-logo" src="web/logo-loteria.png" alt="Lotería de la Provincia"
+         onerror="this.style.display='none'">
+    <p class="pie-l" id="pie-horario"></p>
+    <p class="pie-w">Prohibida la venta a menores de 18 años.<br>El juego compulsivo es perjudicial para la salud.</p>
+  </footer>
+</div>
+
+<div class="wa-bar"><div class="wa-in">
+  <a class="wa-btn" id="wa-btn" href="#" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span id="wa-txt">Escribinos por WhatsApp</span>
+  </a>
+</div></div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════════
+   ⚙️  CONFIGURACIÓN — lo único que tocás vos
+   ══════════════════════════════════════════════════════════════════ */
+const CONFIG = {
+  /* Link "Publicar en la web" de tu planilla, en formato CSV.
+     Usamos este y NO el /gviz/ porque Google le infiere el tipo a la
+     columna: como casi todos los valores son números, descartaba los
+     de texto (el Alias volvía vacío) y fusionaba las primeras filas
+     con el encabezado. El CSV publicado devuelve las celdas tal cual. */
+  SHEET_CSV: 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTDmHEkR6We68ntsXlTbZPiiAqcieKxnmmtMjpzBE3lZzrLbAPYBQU1sDqIQx1qFUwMLF-fuI2ivdiC/pub?output=csv',
+
+  /* Estos tres son el respaldo: si la planilla trae Whatsapp u Horario,
+     mandan los de la planilla. */
+  WHATSAPP: '5491127605432',
+  ATIENDE: { desde:'07:00', hasta:'20:45', dias:[1,2,3,4,5,6] },  // 0=Dom … 6=Sáb
+  DIRECCION: 'Olavarría y Unanue · Provincia de Bs. As.'
+};
+
+const DEFECTO = {
+  config:{ alias:'esquina.celina.mp',
+           alias_titular:'Enviá el comprobante por WhatsApp para confirmar tu jugada.',
+           mensaje_destacado:'', titulo_destacado:'' },
+  favoritos:[],
+  novedades:[{tipo:'info', titulo:'¡Bienvenido al portal!',
+    mensaje:'Acá vas a encontrar las novedades de la agencia, los favoritos del día y los resultados de todas las quinielas.', fecha:''}],
+  resultados:{}
+};
+
+const TURNOS = [
+  { id:'previa',     nombre:'La Previa',  hora:'10:15', cierreMin:15 },
+  { id:'primera',    nombre:'Primera',    hora:'12:00', cierreMin:15 },
+  { id:'matutina',   nombre:'Matutina',   hora:'15:00', cierreMin:15 },
+  { id:'vespertina', nombre:'Vespertina', hora:'18:00', cierreMin:15 },
+  { id:'nocturna',   nombre:'Nocturna',   hora:'21:00', cierreMin:15 }
+];
+
+/* Las 6 jurisdicciones. `q` es el QuinielaId que usa la fuente en el
+   HTML (id="idQ<q>_<turno>_N<posición>"). Verificados por cruce de
+   cabezas. Cada una con su color propio para que no sea todo azul. */
+const JURIS = [
+  { id:'provincia', q:27, nombre:'Provincia',  sig:'PRO', color:'#a3d900', pagina:'ciudad' },
+  { id:'ciudad',    q:26, nombre:'Ciudad',     sig:'CIU', color:'#3d8bff', pagina:'ciudad' },
+  { id:'santafe',   q:15, nombre:'Santa Fe',   sig:'SFE', color:'#ff8c42', pagina:'ciudad' },
+  { id:'cordoba',   q:6,  nombre:'Córdoba',    sig:'CBA', color:'#00b4d8', pagina:'ciudad' },
+  { id:'entrerios', q:14, nombre:'Entre Ríos', sig:'ER',  color:'#9b5de5', pagina:'ciudad' },
+  { id:'montevideo',q:11, nombre:'Montevideo', sig:'MVD', color:'#ffc300', pagina:'uruguaya' }
+];
+
+/* Índice de turno dentro del id HTML. 0,1,3,5 verificados contra
+   cabezas reales; el 2 (Vespertina) queda por descarte. */
+const TURNO_POR_INDICE = { 5:'previa', 0:'primera', 1:'matutina', 2:'vespertina', 3:'nocturna' };
+
+/* `grad` es el degradado de cada juego, tomado del index.html original
+   para no inventar una paleta nueva. */
+const JUEGOS = [
+  { id:'quiniela', nombre:'Quiniela', img:'img-quiniela.png', dias:'Lunes a Sábado',
+    grad:'linear-gradient(130deg,#1a5c2a,#2e7d32,#388e3c)',
+    horarios:TURNOS.map(t=>({nombre:t.nombre,hora:t.hora})) },
+  { id:'quinielaplus', nombre:'Quiniela Plus', img:'img-quinielaplus.png', dias:'Lunes a Sábado',
+    grad:'linear-gradient(130deg,#003020,#1b5e20,#2e7d32)',
+    horarios:[{nombre:'Sorteo Nocturna',hora:'21:00'}] },
+  { id:'quini6', nombre:'Quini 6', img:'img-quini6.png', dias:'Miércoles y Domingos',
+    grad:'linear-gradient(130deg,#bf360c,#e65100,#f57c00)',
+    horarios:[{nombre:'Sorteo',hora:'21:15'},{nombre:'Cierre de venta',hora:'20:15'}] },
+  { id:'lotoplus', nombre:'Loto Plus', img:'img-lotoplus.png', dias:'Martes y Viernes',
+    grad:'linear-gradient(130deg,#4a0404,#b71c1c,#c62828)',
+    horarios:[{nombre:'Sorteo',hora:'21:15'},{nombre:'Cierre de venta',hora:'20:15'}] },
+  { id:'brinco', nombre:'Brinco', img:'img-brinco.png', dias:'Miércoles y Domingos',
+    grad:'linear-gradient(130deg,#1a0050,#4a148c,#6a1b9a)',
+    horarios:[{nombre:'Sorteo',hora:'21:15'},{nombre:'Cierre de venta',hora:'20:15'}] },
+  { id:'loto5', nombre:'Loto 5', img:'img-loto5.png', dias:'Lunes a Sábado',
+    grad:'linear-gradient(130deg,#002020,#004d40,#00695c)',
+    horarios:[{nombre:'Sorteo',hora:'21:15'},{nombre:'Cierre de venta',hora:'20:15'}] }
+];
+
+const ICONOS = { alias:'ic-tarjeta', aviso:'ic-alerta', cierre:'ic-cerrado',
+                 promo:'ic-regalo', info:'ic-info', horario:'ic-reloj' };
+
+/* Personajes de los favoritos.
+   `cy` es el centro vertical del cartel que sostiene cada uno y `fs`
+   el tamaño del número (ambos en % del ancho de la tarjeta, que es
+   cuadrada). NO son estimaciones: se midieron píxel por píxel sobre
+   cada imagen, porque el cartel no está a la misma altura en todas
+   — el del grillo es más alto y más chato que el del resto.
+   Si un favorito no tiene imagen, la tarjeta cae sola a la bolilla. */
+/* Las de web/ están recortadas a un encuadre común (cabeza → debajo
+   del cartel) en formato 5:4. Hizo falta porque las ilustraciones
+   originales no venían parejas: el grillo era cuerpo entero y los
+   otros cinco bustos, así que su cartel quedaba a media altura y la
+   mitad de alto que el resto. Estos cy/fs corresponden al RECORTE. */
+const PERSONAJES = {
+  dia:      { img:'web/personaje-dia.png',      cy:79.1, fs:15.0 },
+  luis:     { img:'web/personaje-luis.png',     cy:75.9, fs:18.3 },
+  gaby:     { img:'web/personaje-gaby.png',     cy:73.8, fs:20.0 },
+  ale:      { img:'web/personaje-ale.png',      cy:75.2, fs:18.9 },
+  manu:     { img:'web/personaje-manu.png',     cy:74.4, fs:19.6 },
+  atrasado: { img:'web/personaje-atrasado.png', cy:75.1, fs:19.0 }
+};
+
+/* "El Día" → dia · "El Atrasado" → atrasado · "Luis" → luis */
+const claveDePersonaje = nombre =>
+  norm(nombre).replace(/^el\s+/,'').replace(/[^a-z0-9]/g,'');
+
+let DATOS = JSON.parse(JSON.stringify(DEFECTO));
+let FUENTE_USADA = '';
+let TURNO_ACTIVO = 'previa';
+let MVD_PEDIDO = false;      // Montevideo se baja recién cuando hace falta
+
+/* ══════════════════════════════════════════════════════════════════
+   UTILIDADES
+   ══════════════════════════════════════════════════════════════════ */
+function ahoraAR(){
+  const f = new Intl.DateTimeFormat('en-US',{
+    timeZone:'America/Argentina/Buenos_Aires', hour12:false,
+    year:'numeric',month:'2-digit',day:'2-digit',
+    hour:'2-digit',minute:'2-digit',second:'2-digit',weekday:'short'
+  }).formatToParts(new Date());
+  const v={}; f.forEach(p=>v[p.type]=p.value);
+  const dias={Sun:0,Mon:1,Tue:2,Wed:3,Thu:4,Fri:5,Sat:6};
+  return { dia:dias[v.weekday], minutos:(+v.hour)*60+(+v.minute),
+           segundos:(+v.hour)*3600+(+v.minute)*60+(+v.second),
+           fecha:`${v.day}/${v.month}/${v.year}` };
+}
+const aMin = h => { const [a,b]=h.split(':').map(Number); return a*60+b; };
+const esc  = s => String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esSi = v => ['si','sí','x','1','true','verdadero','activo'].includes(String(v??'').trim().toLowerCase());
+const icono = t => `<svg class="ic"><use href="#${ICONOS[t]||ICONOS.info}"/></svg>`;
+
+function parseCSV(txt){
+  const filas=[]; let f=[], c='', dentro=false;
+  for(let i=0;i<txt.length;i++){
+    const ch=txt[i];
+    if(dentro){ if(ch==='"'){ if(txt[i+1]==='"'){c+='"';i++;} else dentro=false; } else c+=ch; }
+    else if(ch==='"') dentro=true;
+    else if(ch===','){ f.push(c); c=''; }
+    else if(ch==='\n'){ f.push(c); filas.push(f); f=[]; c=''; }
+    else if(ch!=='\r') c+=ch;
+  }
+  if(c||f.length){ f.push(c); filas.push(f); }
+  return filas.filter(r=>r.some(x=>x.trim()!==''));
+}
+/* Normaliza una clave: minúsculas y sin acentos, para comparar sin sorpresas. */
+const norm = s => String(s??'').trim().toLowerCase()
+                    .normalize('NFD').replace(/[̀-ͯ]/g,'');
+
+/* La planilla es una sola hoja con dos columnas: Descripcion | Detalle.
+   Devolvemos [{clave, valor}, …] salteando el encabezado y los vacíos. */
+async function leerDatos(){
+  if(!CONFIG.SHEET_CSV) return null;
+  const url = CONFIG.SHEET_CSV + (CONFIG.SHEET_CSV.includes('?')?'&':'?') + 'v=' + Date.now();
+  try{
+    const r = await fetch(url,{signal:AbortSignal.timeout(9000)});
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const filas = parseCSV(await r.text());
+    return filas.slice(1)
+      .map(f => ({clave:(f[0]||'').trim(), valor:(f[1]||'').trim()}))
+      .filter(f => f.clave && f.valor);
+  }catch(e){
+    console.warn('[Portal] No se pudo leer la planilla:', e.message);
+    return null;
+  }
+}
+
+async function cargarPlanilla(){
+  const filas = await leerDatos();
+  if(!filas || !filas.length){ console.info('[Portal] Sin planilla: usando datos por defecto.'); return; }
+
+  const favoritos = [], noticias = [];
+
+  for(const {clave, valor} of filas){
+    const k = norm(clave);
+
+    /* "Favorito del Día", "Favorito Luis", … → el nombre va arriba del número */
+    if(k.startsWith('favorito')){
+      let nombre = clave.replace(/^favorito\s*/i,'').trim();
+      if(/^del?\s+dia$/.test(norm(nombre)) || !nombre) nombre = 'El Día';
+      favoritos.push({nombre, numero:valor, motivo:''});
+
+    } else if(k === 'atrasado'){
+      favoritos.push({nombre:'El Atrasado', numero:valor, motivo:''});
+
+    } else if(k === 'alias'){
+      DATOS.config.alias = valor;
+
+    } else if(k === 'whatsapp'){
+      const limpio = valor.replace(/\D/g,'');
+      if(limpio.length >= 10) CONFIG.WHATSAPP = limpio;
+
+    } else if(k === 'horario'){
+      /* "Lunes a Sábados 07:00 a 20:45hs" → guardamos el texto para el pie
+         y sacamos las dos horas para el cartel Abierto/Cerrado. */
+      DATOS.config.horario_txt = valor;
+      const hs = valor.match(/(\d{1,2}:\d{2})\D+(\d{1,2}:\d{2})/);
+      if(hs){ CONFIG.ATIENDE.desde = hs[1]; CONFIG.ATIENDE.hasta = hs[2]; }
+
+    } else if(k.startsWith('noticia') || k.startsWith('novedad')){
+      /* La primera noticia va al cartel verde grande. */
+      noticias.push({tipo:'aviso', titulo:valor, mensaje:'', fecha:'',
+                     destacado: noticias.length === 0});
+
+    } else if(k === 'estado'){
+      DATOS.config.estado = valor;
+    }
+  }
+
+  if(favoritos.length) DATOS.favoritos = favoritos;
+  if(noticias.length)  DATOS.novedades = noticias;
+  console.info(`[Portal] Planilla leída: ${favoritos.length} favoritos, ${noticias.length} noticia(s).`);
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RESULTADOS — 6 jurisdicciones × 5 turnos × 20 números
+   Fuente: loteriasmundiales.com.ar, leída a través de r.jina.ai
+   pidiendo HTML sin convertir (x-return-format: html). Es la única
+   combinación que verificamos que devuelve los 20 premios Y manda
+   cabeceras CORS válidas.
+
+   Parseamos por los id del HTML —id="idQ26_5_N01"— y no por los
+   títulos: la página rotula los turnos de forma inconsistente
+   ("LA PREVIA" en mayúsculas, "La 1ª de la Mañana" en minúsculas,
+   y a veces sin rótulo), pero los id son estables.
+
+   La página "ciudad" trae las 5 jurisdicciones argentinas de una.
+   Montevideo vive aparte y se baja solo si el cliente lo pide.
+   ══════════════════════════════════════════════════════════════════ */
+const BASE_RES = 'https://www.loteriasmundiales.com.ar/Quinielas/';
+const CACHE_KEY = 'celina_resultados_v3';
+const CACHE_MIN = 10;
+
+function parsearIdsHTML(html){
+  /* → { "27": { "previa": {1:'7218', …, 20:'3070'} } } */
+  const out = {};
+  const re = /id="idQ(\d+)_(\d+)_N(\d{2})"[^>]*>(?:<b>)?\s*(\d{4})/g;
+  let m;
+  while((m = re.exec(html)) !== null){
+    const [,q,idxTurno,pos,num] = m;
+    const turno = TURNO_POR_INDICE[+idxTurno];
+    if(!turno) continue;                        // índice que no conocemos: lo ignoramos
+    (out[q] ||= {});
+    (out[q][turno] ||= {});
+    out[q][turno][+pos] = num;
+  }
+  return out;
+}
+
+function volcar(crudo){
+  /* Pasa lo parseado a DATOS.resultados[jurisdiccion][turno] */
+  let n = 0;
+  for(const j of JURIS){
+    const porTurno = crudo[String(j.q)];
+    if(!porTurno) continue;
+    for(const [turno,posiciones] of Object.entries(porTurno)){
+      const nums = [];
+      for(let p=1;p<=20;p++) if(posiciones[p]) nums.push(posiciones[p]);
+      if(!nums.length) continue;
+      (DATOS.resultados[j.id] ||= {});
+      DATOS.resultados[j.id][turno] = {cabeza:posiciones[1]||nums[0], numeros:nums};
+      n++;
+    }
+  }
+  return n;
+}
+
+async function bajarPagina(pagina){
+  const r = await fetch('https://r.jina.ai/' + BASE_RES + pagina, {
+    headers:{'x-return-format':'html'},        // jina acepta preflight para esta cabecera
+    signal:AbortSignal.timeout(30000)
+  });
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  return await r.text();
+}
+
+async function cargarResultados(){
+  const leerCache = () => { try{ return JSON.parse(localStorage.getItem(CACHE_KEY)||'null'); }catch{ return null; } };
+  const hoy = ahoraAR().fecha;
+
+  /* 1 · Cache fresca y del mismo día (nunca mostramos otra fecha) */
+  const cache = leerCache();
+  if(cache && cache.fecha === hoy && Date.now()-cache.ts < CACHE_MIN*60000){
+    FUENTE_USADA = 'Loterías Mundiales';
+    console.info('[Portal] Resultados tomados de la cache local.');
+    return volcar(cache.crudo) > 0;
+  }
+
+  /* 2 · Descarga real */
+  try{
+    const crudo = parsearIdsHTML(await bajarPagina('ciudad'));
+    if(!Object.keys(crudo).length) throw new Error('no se encontraron bloques');
+    FUENTE_USADA = 'Loterías Mundiales';
+    try{ localStorage.setItem(CACHE_KEY, JSON.stringify({ts:Date.now(), fecha:hoy, crudo})); }catch{}
+    console.info('[Portal] Resultados actualizados (5 jurisdicciones argentinas).');
+    return volcar(crudo) > 0;
+  }catch(e){
+    console.warn('[Portal] No se pudieron obtener resultados:', e.message);
+    if(cache && cache.fecha === hoy){
+      FUENTE_USADA = 'Loterías Mundiales (copia guardada)';
+      return volcar(cache.crudo) > 0;
+    }
+    return false;
+  }
+}
+
+/* Montevideo: solo cuando el cliente abre esa tarjeta. Así no le
+   hacemos descargar una página entera a quien no la mira. */
+async function cargarMontevideo(){
+  if(MVD_PEDIDO) return;
+  MVD_PEDIDO = true;
+  try{
+    const crudo = parsearIdsHTML(await bajarPagina('uruguaya'));
+    if(volcar(crudo)) { console.info('[Portal] Montevideo cargado.'); pintarResultados(); }
+  }catch(e){ console.warn('[Portal] No se pudo cargar Montevideo:', e.message); }
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   RENDER
+   ══════════════════════════════════════════════════════════════════ */
+function estaAbierto(n){
+  const f=(DATOS.config.estado||'').toLowerCase();
+  if(f==='cerrado') return false;
+  if(f==='abierto') return true;
+  return CONFIG.ATIENDE.dias.includes(n.dia)
+      && n.minutos>=aMin(CONFIG.ATIENDE.desde) && n.minutos<aMin(CONFIG.ATIENDE.hasta);
+}
+
+function pintarEstado(){
+  const n=ahoraAR(), abierto=estaAbierto(n), el=document.getElementById('estado');
+  el.className='estado '+(abierto?'abierto':'cerrado');
+  document.getElementById('estado-txt').textContent = abierto
+    ? `Abierto ahora · hasta ${CONFIG.ATIENDE.hasta}` : `Cerrado · abrimos ${CONFIG.ATIENDE.desde}`;
+  /* Si la planilla trae el horario escrito, mostramos ese texto tal cual. */
+  document.getElementById('pie-horario').innerHTML = DATOS.config.horario_txt
+    ? `<b>${esc(DATOS.config.horario_txt)}</b>`
+    : `Atención de <b>${CONFIG.ATIENDE.desde} a ${CONFIG.ATIENDE.hasta}</b><br>Lunes a Sábado`;
+}
+
+function pintarDestacado(){
+  const caja=document.getElementById('destacado');
+  const d=DATOS.novedades.find(n=>n.destacado);
+  const t=DATOS.config.titulo_destacado, m=DATOS.config.mensaje_destacado;
+  if(d){
+    document.getElementById('dest-et').textContent = d.tipo==='alias'?'Nuevo alias':'Importante';
+    document.getElementById('dest-tt').textContent = d.titulo;
+    document.getElementById('dest-ms').textContent = d.mensaje;
+    document.getElementById('dest-fecha').textContent = d.fecha||'';
+    caja.classList.remove('oculto');
+  } else if(t||m){
+    document.getElementById('dest-tt').textContent = t||'Atención';
+    document.getElementById('dest-ms').textContent = m||'';
+    document.getElementById('dest-fecha').textContent = '';
+    caja.classList.remove('oculto');
+  } else caja.classList.add('oculto');
+}
+
+function pintarNovedades(){
+  const cont=document.getElementById('novedades');
+  const lista=DATOS.novedades.filter(n=>!n.destacado);
+  if(!lista.length){
+    cont.innerHTML = document.getElementById('destacado').classList.contains('oculto')
+      ? `<div class="vacio">No hay novedades por ahora.</div>` : '';
+    return;
+  }
+  cont.innerHTML = lista.map(n=>`
+    <div class="nov tipo-${esc(n.tipo)}">
+      <div class="nov-ico">${icono(n.tipo)}</div>
+      <div>
+        ${n.titulo?`<div class="nov-t">${esc(n.titulo)}</div>`:''}
+        ${n.mensaje?`<div class="nov-m">${esc(n.mensaje)}</div>`:''}
+        ${n.fecha?`<div class="nov-f">${esc(n.fecha)}</div>`:''}
+      </div></div>`).join('');
+}
+
+let timerProx=null;
+function pintarProximo(){
+  const n=ahoraAR();
+  const nom=document.getElementById('prox-nom'), hora=document.getElementById('prox-hora'),
+        cta=document.getElementById('cuenta');
+  const hoyJuega=CONFIG.ATIENDE.dias.includes(n.dia);
+  const sig=hoyJuega ? TURNOS.find(t=>n.minutos < aMin(t.hora)-t.cierreMin) : null;
+  if(!sig){
+    nom.textContent = hoyJuega?'Cerró el último turno':'Hoy no hay sorteos';
+    hora.textContent = hoyJuega?'La Previa vuelve mañana a las 10:15':'Volvemos el lunes a las 10:15';
+    cta.className='cuenta cerrado-hoy'; cta.textContent=''; return;
+  }
+  nom.textContent = sig.nombre;
+  const cierre=aMin(sig.hora)-sig.cierreMin;
+  hora.textContent = `Sorteo ${sig.hora} hs · tomamos jugadas hasta `
+    + `${String(Math.floor(cierre/60)).padStart(2,'0')}:${String(cierre%60).padStart(2,'0')}`;
+  const faltan=cierre*60-n.segundos;
+  const h=Math.floor(faltan/3600), m=Math.floor((faltan%3600)/60), s=faltan%60;
+  cta.className='cuenta';
+  cta.innerHTML =
+    `<div class="u"><div class="n">${String(h).padStart(2,'0')}</div><div class="l">Horas</div></div>`+
+    `<div class="u"><div class="n">${String(m).padStart(2,'0')}</div><div class="l">Min</div></div>`+
+    `<div class="u"><div class="n">${String(s).padStart(2,'0')}</div><div class="l">Seg</div></div>`;
+}
+
+function pintarFavoritos(){
+  const cont=document.getElementById('favs'), nota=document.getElementById('favs-nota');
+  if(!DATOS.favoritos.length){
+    cont.innerHTML = `<div class="vacio" style="grid-column:1/-1">
+      <img src="grillo extra.png" alt="" onerror="this.style.display='none'">
+      <div>Todavía no cargamos los favoritos de hoy.<br>¡Consultanos por WhatsApp!</div></div>`;
+    nota.textContent=''; return;
+  }
+  cont.innerHTML = DATOS.favoritos.map(f=>{
+    const clave = claveDePersonaje(f.nombre||'');
+    const p = PERSONAJES[clave];
+    const extra = clave==='dia' ? ' es-dia' : (clave==='atrasado' ? ' es-atr' : '');
+    const cab = `<div class="fav-cab">${esc(f.nombre||'Favorito')}</div>`;
+
+    /* Con imagen: el número va dentro del cartel del personaje. */
+    if(p) return `<div class="fav${extra}">${cab}
+      <div class="fav-foto" style="--cy:${p.cy}%;--fs:${p.fs}">
+        <img src="${p.img}" alt="${esc(f.nombre||'')}"
+             onerror="this.closest('.fav-foto').classList.add('sin-foto');this.remove()">
+        <span class="fav-num">${esc(f.numero)}</span>
+      </div></div>`;
+
+    /* Sin imagen: la bolilla de siempre. */
+    return `<div class="fav${extra}">${cab}
+      <div class="fav-foto sin-foto"><span class="fav-num-solo">${esc(f.numero)}</span></div>
+    </div>`;
+  }).join('');
+  nota.textContent='Los favoritos son sugerencias de la agencia. No garantizan resultados.';
+}
+
+function pintarSelectorTurnos(){
+  const n=ahoraAR();
+  document.getElementById('turnos-sel').innerHTML = TURNOS.map(t=>`
+    <button class="t-chip${t.id===TURNO_ACTIVO?' on':''}" data-t="${t.id}">
+      ${t.nombre}<span class="h">${t.hora}</span></button>`).join('');
+  document.querySelectorAll('.t-chip').forEach(b=>
+    b.addEventListener('click',()=>{ TURNO_ACTIVO=b.dataset.t; pintarSelectorTurnos(); pintarResultados(); }));
+}
+
+function pintarResultados(){
+  const cont=document.getElementById('jurisdicciones'), n=ahoraAR();
+  const turno=TURNOS.find(t=>t.id===TURNO_ACTIVO)||TURNOS[0];
+  const yaSorteo = n.minutos >= aMin(turno.hora);
+
+  cont.innerHTML = JURIS.map(j=>{
+    const r=(DATOS.resultados[j.id]||{})[TURNO_ACTIVO];
+    const estilo=`--c:${j.color}`;
+    if(!r){
+      const txt = j.id==='montevideo' && !MVD_PEDIDO ? 'Tocá para cargar'
+                : yaSorteo ? 'Sin datos' : 'Pendiente';
+      return `<div class="jur${j.id==='montevideo'?' tiene':''}" style="${estilo}" data-j="${j.id}">
+        <div class="jur-h"><div class="jur-sig">${j.sig}</div>
+          <div class="jur-t"><div class="jur-n">${j.nombre}</div>
+            <div class="jur-s">${turno.nombre} · ${turno.hora} hs</div></div>
+          <div class="jur-pend">${txt}</div></div></div>`;
+    }
+    const nums=r.numeros||[];
+    return `<div class="jur tiene" style="${estilo}" data-j="${j.id}">
+      <div class="jur-h"><div class="jur-sig">${j.sig}</div>
+        <div class="jur-t"><div class="jur-n">${j.nombre}</div>
+          <div class="jur-s">${turno.nombre} · ${nums.length} números</div></div>
+        <div class="jur-cab">${esc(r.cabeza)}</div>
+        <span class="jur-fl"><svg class="ic"><use href="#ic-flecha"/></svg></span></div>
+      <div class="jur-nums"><div class="jur-nums-in">${
+        nums.map((v,i)=>`<div class="rn${i===0?' cabeza':''}">
+          <div class="p">${String(i+1).padStart(2,'0')}</div><div class="v">${esc(v)}</div></div>`).join('')
+      }</div></div></div>`;
+  }).join('');
+
+  cont.querySelectorAll('.jur.tiene .jur-h').forEach(h=>{
+    h.addEventListener('click',()=>{
+      const caja=h.parentElement;
+      if(caja.dataset.j==='montevideo' && !MVD_PEDIDO){ cargarMontevideo(); return; }
+      caja.classList.toggle('abierto');
+    });
+  });
+
+  const hay = JURIS.some(j=>(DATOS.resultados[j.id]||{})[TURNO_ACTIVO]);
+  document.getElementById('res-fecha').textContent = hay
+    ? `Tocá una lotería para ver los 20 números · ${n.fecha}`
+    : (yaSorteo ? `Todavía no publicaron el sorteo de ${turno.nombre}.`
+                : `El sorteo de ${turno.nombre} es a las ${turno.hora} hs.`);
+  const tag=document.getElementById('fuente-tag');
+  if(FUENTE_USADA){ tag.textContent='Fuente: '+FUENTE_USADA; tag.classList.remove('oculto'); }
+  else tag.classList.add('oculto');
+}
+
+function pintarJuegos(){
+  const n=ahoraAR();
+  document.getElementById('juegos').innerHTML = JUEGOS.map((j,i)=>`
+    <div class="juego${i===0?' open':''}" style="--g:${j.grad}">
+      <div class="juego-h">
+        <img class="juego-art" src="${j.img}" alt="" onerror="this.style.display='none'">
+        <div class="juego-t"><div class="juego-n">${j.nombre}</div><div class="juego-d">${j.dias}</div></div>
+        <span class="juego-fl"><svg class="ic"><use href="#ic-flecha"/></svg></span>
+      </div>
+      <div class="juego-body"><div class="juego-in">
+        ${j.horarios.map(h=>{
+          const pasado = j.id==='quiniela' && n.minutos>aMin(h.hora);
+          return `<div class="horario${pasado?' pasado':''}">
+            <span class="hn">${h.nombre}</span><span class="hh">${h.hora} hs</span></div>`;
+        }).join('')}
+      </div></div></div>`).join('');
+  document.querySelectorAll('.juego-h').forEach(h=>
+    h.addEventListener('click',()=>h.parentElement.classList.toggle('open')));
+}
+
+function pintarAlias(){
+  const a=DATOS.config.alias||'';
+  document.getElementById('alias-v').textContent = a||'Consultá por WhatsApp';
+  document.getElementById('alias-tit').textContent = DATOS.config.alias_titular||'';
+  const btn=document.getElementById('btn-cop');
+  if(!a){ btn.style.display='none'; return; }
+  if(btn.dataset.listo) return;
+  btn.dataset.listo='1';
+  btn.addEventListener('click', async ()=>{
+    const actual=DATOS.config.alias||'';
+    try{ await navigator.clipboard.writeText(actual); }
+    catch{ const t=document.createElement('textarea'); t.value=actual; document.body.appendChild(t);
+           t.select(); document.execCommand('copy'); t.remove(); }
+    document.getElementById('cop-txt').textContent='¡Copiado!';
+    document.getElementById('cop-ico').innerHTML='<use href="#ic-check"/>';
+    btn.classList.add('ok');
+    setTimeout(()=>{ document.getElementById('cop-txt').textContent='Copiar';
+      document.getElementById('cop-ico').innerHTML='<use href="#ic-copiar"/>';
+      btn.classList.remove('ok'); },1900);
+  });
+}
+
+function pintarWhatsApp(){
+  const abierto=estaAbierto(ahoraAR());
+  const msg = abierto ? '¡Hola! Quiero hacer una consulta 🍀'
+                      : '¡Hola! Les escribo fuera de horario, quiero dejar mi consulta 🍀';
+  document.getElementById('wa-btn').href=`https://wa.me/${CONFIG.WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  document.getElementById('wa-txt').textContent = abierto?'Escribinos por WhatsApp':'Dejanos tu mensaje';
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   ARRANQUE
+   ══════════════════════════════════════════════════════════════════ */
+/* Al abrir, mostramos el último turno que ya se sorteó. */
+function turnoInicial(){
+  const n=ahoraAR();
+  const pasados=TURNOS.filter(t=>n.minutos>=aMin(t.hora));
+  return pasados.length ? pasados[pasados.length-1].id : 'previa';
+}
+
+function pintarTodo(){
+  pintarEstado(); pintarDestacado(); pintarNovedades(); pintarFavoritos();
+  pintarProximo(); pintarSelectorTurnos(); pintarResultados();
+  pintarJuegos(); pintarAlias(); pintarWhatsApp();
+}
+
+(async function init(){
+  document.getElementById('dir').textContent = CONFIG.DIRECCION;
+  TURNO_ACTIVO = turnoInicial();
+  pintarTodo();
+  if(timerProx) clearInterval(timerProx);
+  timerProx = setInterval(pintarProximo,1000);
+
+  await cargarPlanilla();
+  pintarTodo();
+
+  await cargarResultados();
+  pintarResultados();
+})();
+
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden) pintarTodo(); });
+</script>
+</body>
+</html>
